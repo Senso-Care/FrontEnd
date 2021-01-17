@@ -15,6 +15,11 @@ import { TemperaturePageComponent } from './temperature-page/temperature-page.co
 import { WellnessPageComponent } from './wellness-page/wellness-page.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxChartsLineChartComponent } from './ngx-charts-line-chart/ngx-charts-line-chart.component';
+import { NgxChartsHeatMapComponent } from './ngx-charts-heat-map/ngx-charts-heat-map.component';
+import { NgxChartsGaugeComponent } from './ngx-charts-gauge/ngx-charts-gauge.component';
+import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +27,10 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     HomePageComponent,
     TemperaturePageComponent,
     WellnessPageComponent,
-    DatatableComponent
+    DatatableComponent,
+    NgxChartsLineChartComponent,
+    NgxChartsHeatMapComponent,
+    NgxChartsGaugeComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +42,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    FormsModule,
+    NgxChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
