@@ -171,7 +171,7 @@ export class NgxChartsHeatMapComponent implements OnInit {
   yAxisLabel: string = 'Days';
 
   colorScheme = {
-    domain: ['#4d9ce5', '#34b8f9', '#23c175', '#e5c84d', '#f98d34', '#f95c34', '#f93434']
+    domain: ['#4236c9','#4d9ce5', '#34b8f9', '#23c175', '#e5c84d', '#f98d34', '#f95c34', '#f93434']
   };
 
   constructor() {
