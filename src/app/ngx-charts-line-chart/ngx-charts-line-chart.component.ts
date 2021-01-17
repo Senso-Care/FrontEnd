@@ -83,6 +83,9 @@ export class NgxChartsLineChartComponent implements OnInit {
     Object.assign(this.multi );
   }
 
+  ngOnInit(): void {
+  }
+
   onSelect(data): void {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
@@ -94,8 +97,4 @@ export class NgxChartsLineChartComponent implements OnInit {
   onDeactivate(data): void {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
-
-  ngOnInit(): void {
-  }
-
 }
