@@ -21,6 +21,8 @@ import { NgxChartsGaugeComponent } from './ngx-charts-gauge/ngx-charts-gauge.com
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ServiceData } from './service-data/service-data';
+import { GenericMetricBoardComponent } from './generic-metric-board/generic-metric-board.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +33,8 @@ import { ServiceData } from './service-data/service-data';
     DatatableComponent,
     NgxChartsLineChartComponent,
     NgxChartsHeatMapComponent,
-    NgxChartsGaugeComponent
+    NgxChartsGaugeComponent,
+    GenericMetricBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { ServiceData } from './service-data/service-data';
     NgxDatatableModule,
     FormsModule,
     NgxChartsModule,
+    NgbModule,
   ],
   providers: [
     ServiceData
