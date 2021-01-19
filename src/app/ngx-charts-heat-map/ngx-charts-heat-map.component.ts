@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceData } from '../service-data/service-data';
 
 @Component({
   selector: 'app-ngx-charts-heat-map',
@@ -9,156 +10,16 @@ export class NgxChartsHeatMapComponent implements OnInit {
 
   multi = [
     {
-      "name": "May",
+      "name": "NoData",
       "series": [
         {
-          "name": "Sun",
-          "value": 20
-        },
-        {
-          "name": "Sat",
-          "value": 25
-        },
-        {
-          "name": "Thu",
-          "value": 27
-        },
-        {
-          "name": "Wed",
-          "value": 32
-        },
-        {
-          "name": "Tue",
-          "value": 24
-        },
-        {
-          "name": "Mon",
-          "value": 22
-        }
-      ]
-    },
-
-    {
-      "name": "June",
-      "series": [
-        {
-          "name": "Sun",
-          "value": 22
-        },
-        {
-          "name": "Sat",
-          "value": 24
-        },
-        {
-          "name": "Thu",
-          "value": 27
-        },
-        {
-          "name": "Wed",
-          "value": 26
-        },
-        {
-          "name": "Tue",
-          "value": 28
-        },
-        {
-          "name": "Mon",
-          "value": 25
-        }
-      ]
-    },
-
-    {
-      "name": "July",
-      "series": [
-        {
-          "name": "Sun",
-          "value": 25
-        },
-        {
-          "name": "Sat",
-          "value": 26
-        },
-        {
-          "name": "Thu",
-          "value": 33
-        },
-        {
-          "name": "Wed",
-          "value": 32
-        },
-        {
-          "name": "Tue",
-          "value": 30
-        },
-        {
-          "name": "Mon",
-          "value": 34
-        }
-      ]
-    },
-    {
-      "name": "September",
-      "series": [
-        {
-          "name": "Sun",
-          "value": 15
-        },
-        {
-          "name": "Sat",
-          "value": 16
-        },
-        {
-          "name": "Thu",
-          "value": 20
-        },
-        {
-          "name": "Wed",
-          "value": 17
-        },
-        {
-          "name": "Tue",
-          "value": 13
-        },
-        {
-          "name": "Mon",
-          "value": 18
-        }
-      ]
-    },
-    {
-      "name": "Decembre",
-      "series": [
-        {
-          "name": "Sun",
-          "value": 5
-        },
-        {
-          "name": "Sat",
-          "value": 7
-        },
-        {
-          "name": "Thu",
-          "value": 11
-        },
-        {
-          "name": "Wed",
-          "value": 8
-        },
-        {
-          "name": "Tue",
-          "value": 4
-        },
-        {
-          "name": "Mon",
+          "name": "NoData",
           "value": 0
         }
       ]
     }
   ];
-
   view: any[] = [700, 300];
-
   // options
   legend: boolean = true;
   showLabels: boolean = true;
@@ -169,16 +30,18 @@ export class NgxChartsHeatMapComponent implements OnInit {
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Months';
   yAxisLabel: string = 'Days';
-
   colorScheme = {
     domain: ['#4236c9','#4d9ce5', '#34b8f9', '#23c175', '#e5c84d', '#f98d34', '#f95c34', '#f93434']
   };
 
-  constructor() {
-    Object.assign(this.multi );
+  constructor(private serviceData : ServiceData) {
+    Object.assign(this.multi);
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.serviceData.getAverageData()
+      .then(response => this.multi = response)
+      .catch(error => console.log(error));
   }
 
   onSelect(data): void {

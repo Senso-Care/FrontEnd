@@ -20,6 +20,7 @@ import { NgxChartsHeatMapComponent } from './ngx-charts-heat-map/ngx-charts-heat
 import { NgxChartsGaugeComponent } from './ngx-charts-gauge/ngx-charts-gauge.component';
 import { FormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ServiceData } from './service-data/service-data';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +47,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     FormsModule,
     NgxChartsModule,
   ],
-  providers: [],
+  providers: [
+    ServiceData
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

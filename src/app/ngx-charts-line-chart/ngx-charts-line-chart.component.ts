@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceData } from '../service-data/service-data';
 
 @Component({
   selector: 'app-ngx-charts-line-chart',
@@ -8,56 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class NgxChartsLineChartComponent implements OnInit {
   multi = [
     {
-      "name": "Temperature",
+      "name": "NoData",
       "series": [
         {
-          "name": "23-05-2020",
-          "value": 24
+          "name": "00-00-0000",
+          "value": 0
         },
-        {
-          "name": "28-05-2020",
-          "value": 22
-        },
-        {
-          "name": "08-07-2020",
-          "value": 28
-        }
-      ]
-    },
-
-    {
-      "name": "Humidity",
-      "series": [
-        {
-          "name": "23-05-2020",
-          "value": 89
-        },
-        {
-          "name": "28-05-2020",
-          "value": 80
-        },
-        {
-          "name": "08-07-2020",
-          "value": 87
-        }
-      ]
-    },
-
-    {
-      "name": "Heart",
-      "series": [
-        {
-          "name": "23-05-2020",
-          "value": 14
-        },
-        {
-          "name": "28-05-2020",
-          "value": 12
-        },
-        {
-          "name": "08-07-2020",
-          "value": 14
-        }
       ]
     }
   ];
@@ -79,11 +36,14 @@ export class NgxChartsLineChartComponent implements OnInit {
     domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
   };
 
-  constructor() {
+  constructor(private serviceData : ServiceData) {
     Object.assign(this.multi );
   }
 
   ngOnInit(): void {
+    this.serviceData.getMultiData()
+      .then(response => this.multi = response)
+      .catch(error => console.log(error));
   }
 
   onSelect(data): void {

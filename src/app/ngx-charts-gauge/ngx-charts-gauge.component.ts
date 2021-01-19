@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceData } from '../service-data/service-data';
 
 @Component({
   selector: 'app-ngx-charts-gauge',
@@ -10,7 +11,7 @@ export class NgxChartsGaugeComponent implements OnInit {
   single = [
     {
       "name": "Temperature",
-      "value": 24
+      "value": 0
     }
   ];
   view: any[] = [500, 400];
@@ -21,8 +22,20 @@ export class NgxChartsGaugeComponent implements OnInit {
     domain: ['#5AA454']
   };
 
-  constructor() {
+  constructor(private serviceData : ServiceData) {
     Object.assign(this.single );
+  }
+
+  ngOnInit() {
+    this.serviceData.getSingleData()
+      .then(response => {
+        for (const value of response) {
+          if(value.name == "Temperature") {
+            this.single = [value];
+          }
+        }
+      })
+      .catch(error => console.log(error));
   }
 
   onSelect(data): void {
@@ -37,7 +50,5 @@ export class NgxChartsGaugeComponent implements OnInit {
     console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
-  ngOnInit(): void {
-  }
 
 }

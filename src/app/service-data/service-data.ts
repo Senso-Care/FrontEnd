@@ -1,5 +1,5 @@
 import { Injectable, Optional } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 
 export interface DataInfo {
   temperature: number,
@@ -10,8 +10,11 @@ export interface DataInfo {
 
 @Injectable()
 export class ServiceData {
-  constructor(private HttpClient: HttpClient) {
+  /*constructor(private HttpClient: HttpClient) {
 
+  }*/
+
+  constructor() {
   }
 
   async getSingleData() {
@@ -19,15 +22,27 @@ export class ServiceData {
       {
         "name": "Temperature",
         "value": 24
-      }
+      },
+      {
+        "name": "Humidity",
+        "value": 84
+      },
+      {
+        "name": "Heart",
+        "value": 12
+      },
+      {
+        "name": "Wellness",
+        "value": 8
+      },
     ];
 
     return single;
   }
 
 
-  async getMultiData() {
-    let multi = [
+  async getAverageData() {
+    let averageData = [
       {
         "name": "May",
         "series": [
@@ -57,7 +72,6 @@ export class ServiceData {
           }
         ]
       },
-
       {
         "name": "June",
         "series": [
@@ -172,6 +186,66 @@ export class ServiceData {
           {
             "name": "Mon",
             "value": 0
+          }
+        ]
+      }
+    ];
+
+    return averageData;
+  }
+
+  async getMultiData() {
+    let multi = [
+      {
+        "name": "Temperature",
+        "series": [
+          {
+            "name": "23-05-2020",
+            "value": 24
+          },
+          {
+            "name": "28-05-2020",
+            "value": 22
+          },
+          {
+            "name": "08-07-2020",
+            "value": 28
+          }
+        ]
+      },
+
+      {
+        "name": "Humidity",
+        "series": [
+          {
+            "name": "23-05-2020",
+            "value": 89
+          },
+          {
+            "name": "28-05-2020",
+            "value": 80
+          },
+          {
+            "name": "08-07-2020",
+            "value": 87
+          }
+        ]
+      },
+
+      {
+        "name": "Heart",
+        "series": [
+          {
+            "name": "23-05-2020",
+            "value": 14
+          },
+          {
+            "name": "28-05-2020",
+            "value": 12
+          },
+          {
+            "name": "08-07-2020",
+            "value": 14
           }
         ]
       }
