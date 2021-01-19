@@ -15,6 +15,15 @@ import { TemperaturePageComponent } from './temperature-page/temperature-page.co
 import { WellnessPageComponent } from './wellness-page/wellness-page.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxChartsLineChartComponent } from './ngx-charts-line-chart/ngx-charts-line-chart.component';
+import { NgxChartsHeatMapComponent } from './ngx-charts-heat-map/ngx-charts-heat-map.component';
+import { NgxChartsGaugeComponent } from './ngx-charts-gauge/ngx-charts-gauge.component';
+import { FormsModule } from '@angular/forms';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { ServiceData } from './service-data/service-data';
+import { GenericMetricBoardComponent } from './generic-metric-board/generic-metric-board.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +31,11 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     HomePageComponent,
     TemperaturePageComponent,
     WellnessPageComponent,
-    DatatableComponent
+    DatatableComponent,
+    NgxChartsLineChartComponent,
+    NgxChartsHeatMapComponent,
+    NgxChartsGaugeComponent,
+    GenericMetricBoardComponent
   ],
   imports: [
     BrowserModule,
@@ -34,9 +47,14 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    FormsModule,
+    NgxChartsModule,
+    NgbModule,
   ],
-  providers: [],
+  providers: [
+    ServiceData
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
