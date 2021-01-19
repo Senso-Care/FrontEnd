@@ -23,6 +23,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { ServiceData } from './service-data/service-data';
 import { GenericMetricBoardComponent } from './generic-metric-board/generic-metric-board.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,

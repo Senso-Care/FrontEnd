@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ServiceData } from '../service-data/service-data';
 
 @Component({
@@ -7,35 +7,44 @@ import { ServiceData } from '../service-data/service-data';
   styleUrls: ['./ngx-charts-gauge.component.scss']
 })
 export class NgxChartsGaugeComponent implements OnInit {
-
   single = [
     {
-      "name": "Temperature",
+      "name": "NoData",
       "value": 0
     }
   ];
-  view: any[] = [500, 400];
+  //view: any[] = [500, 400];
   legend: boolean = true;
   legendPosition: string = 'below';
-
   colorScheme = {
     domain: ['#5AA454']
   };
-
-  constructor(private serviceData : ServiceData) {
-    Object.assign(this.single );
+  @Input()
+  get measure(): string {
+    return this._measure;
   }
-
-  ngOnInit() {
+  set measure(measure: string) {
+    this._measure = measure;
+    console.log(this.measure + "HALOA");
     this.serviceData.getSingleData()
       .then(response => {
         for (const value of response) {
-          if(value.name == "Temperature") {
+          if (value.name == measure) {
             this.single = [value];
           }
         }
       })
       .catch(error => console.log(error));
+  }
+  private _measure: string;
+
+
+  constructor(private serviceData: ServiceData) {
+    Object.assign(this.single);
+  }
+
+  ngOnInit() {
+
   }
 
   onSelect(data): void {

@@ -11,6 +11,9 @@ export class GenericMetricBoardComponent implements OnInit {
   measure = "generic"
 
   constructor(public router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => {
+      return false;
+    };
     this.updateMeasure(router.url);
   }
 

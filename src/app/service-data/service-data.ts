@@ -32,6 +32,10 @@ export class ServiceData {
         "value": 12
       },
       {
+        "name": "Vox2",
+        "value": 98
+      },
+      {
         "name": "Wellness",
         "value": 8
       },
