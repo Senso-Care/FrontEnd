@@ -1,3 +1,4 @@
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ServiceData } from '../service-data/service-data';
 
@@ -33,15 +34,29 @@ export class NgxChartsHeatMapComponent implements OnInit {
   colorScheme = {
     domain: ['#4236c9','#4d9ce5', '#34b8f9', '#23c175', '#e5c84d', '#f98d34', '#f95c34', '#f93434']
   };
+  @Input()
+  get measure(): string {
+    return this._measure;
+  }
+  set measure(measure: string) {
+    this._measure = measure;
+    this.serviceData.getAverageData()
+      .then(response => {
+        for (const value of response) {
+          if (value.name == measure) {
+            this.multi = value.series;
+          }
+        }
+      })
+      .catch(error => console.log(error));
+  }
+  private _measure: string;
 
   constructor(private serviceData : ServiceData) {
     Object.assign(this.multi);
   }
 
   ngOnInit() {
-    this.serviceData.getAverageData()
-      .then(response => this.multi = response)
-      .catch(error => console.log(error));
   }
 
   onSelect(data): void {

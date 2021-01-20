@@ -17,7 +17,7 @@ export class ServiceData {
   constructor() {
   }
 
-  async getSingleData() {
+  async getLastData() {
     let single = [
       {
         "name": "Temperature",
@@ -48,157 +48,253 @@ export class ServiceData {
   async getAverageData() {
     let averageData = [
       {
-        "name": "May",
+        "name": "Temperature",
         "series": [
           {
-            "name": "Sun",
-            "value": 20
+            "name": "May",
+            "series": [
+              {
+                "name": "Sun",
+                "value": 20
+              },
+              {
+                "name": "Sat",
+                "value": 25
+              },
+              {
+                "name": "Thu",
+                "value": 27
+              },
+              {
+                "name": "Wed",
+                "value": 32
+              },
+              {
+                "name": "Tue",
+                "value": 24
+              },
+              {
+                "name": "Mon",
+                "value": 22
+              }
+            ]
           },
           {
-            "name": "Sat",
-            "value": 25
+            "name": "June",
+            "series": [
+              {
+                "name": "Sun",
+                "value": 22
+              },
+              {
+                "name": "Sat",
+                "value": 24
+              },
+              {
+                "name": "Thu",
+                "value": 27
+              },
+              {
+                "name": "Wed",
+                "value": 26
+              },
+              {
+                "name": "Tue",
+                "value": 28
+              },
+              {
+                "name": "Mon",
+                "value": 25
+              }
+            ]
           },
-          {
-            "name": "Thu",
-            "value": 27
-          },
-          {
-            "name": "Wed",
-            "value": 32
-          },
-          {
-            "name": "Tue",
-            "value": 24
-          },
-          {
-            "name": "Mon",
-            "value": 22
-          }
-        ]
-      },
-      {
-        "name": "June",
-        "series": [
-          {
-            "name": "Sun",
-            "value": 22
-          },
-          {
-            "name": "Sat",
-            "value": 24
-          },
-          {
-            "name": "Thu",
-            "value": 27
-          },
-          {
-            "name": "Wed",
-            "value": 26
-          },
-          {
-            "name": "Tue",
-            "value": 28
-          },
-          {
-            "name": "Mon",
-            "value": 25
-          }
-        ]
-      },
 
-      {
-        "name": "July",
-        "series": [
           {
-            "name": "Sun",
-            "value": 25
+            "name": "July",
+            "series": [
+              {
+                "name": "Sun",
+                "value": 25
+              },
+              {
+                "name": "Sat",
+                "value": 26
+              },
+              {
+                "name": "Thu",
+                "value": 33
+              },
+              {
+                "name": "Wed",
+                "value": 32
+              },
+              {
+                "name": "Tue",
+                "value": 30
+              },
+              {
+                "name": "Mon",
+                "value": 34
+              }
+            ]
           },
           {
-            "name": "Sat",
-            "value": 26
+            "name": "September",
+            "series": [
+              {
+                "name": "Sun",
+                "value": 15
+              },
+              {
+                "name": "Sat",
+                "value": 16
+              },
+              {
+                "name": "Thu",
+                "value": 20
+              },
+              {
+                "name": "Wed",
+                "value": 17
+              },
+              {
+                "name": "Tue",
+                "value": 13
+              },
+              {
+                "name": "Mon",
+                "value": 18
+              }
+            ]
           },
           {
-            "name": "Thu",
-            "value": 33
-          },
-          {
-            "name": "Wed",
-            "value": 32
-          },
-          {
-            "name": "Tue",
-            "value": 30
-          },
-          {
-            "name": "Mon",
-            "value": 34
+            "name": "Decembre",
+            "series": [
+              {
+                "name": "Sun",
+                "value": 5
+              },
+              {
+                "name": "Sat",
+                "value": 7
+              },
+              {
+                "name": "Thu",
+                "value": 11
+              },
+              {
+                "name": "Wed",
+                "value": 8
+              },
+              {
+                "name": "Tue",
+                "value": 4
+              },
+              {
+                "name": "Mon",
+                "value": 0
+              }
+            ]
           }
         ]
       },
       {
-        "name": "September",
+      "name": "Humidity",
         "series": [
           {
-            "name": "Sun",
-            "value": 15
+            "name": "January",
+            "series": [
+              {
+                "name": "Sun",
+                "value": 81
+              },
+              {
+                "name": "Sat",
+                "value": 80
+              },
+              {
+                "name": "Thu",
+                "value": 83
+              },
+              {
+                "name": "Wed",
+                "value": 82
+              },
+              {
+                "name": "Tue",
+                "value": 89
+              },
+              {
+                "name": "Mon",
+                "value": 22
+              }
+            ]
           },
-          {
-            "name": "Sat",
-            "value": 16
-          },
-          {
-            "name": "Thu",
-            "value": 20
-          },
-          {
-            "name": "Wed",
-            "value": 17
-          },
-          {
-            "name": "Tue",
-            "value": 13
-          },
-          {
-            "name": "Mon",
-            "value": 18
-          }
         ]
       },
       {
-        "name": "Decembre",
-        "series": [
-          {
-            "name": "Sun",
-            "value": 5
+        "name": "Vox2",
+          "series": [
+            {
+              "name": "January",
+              "series": [
+                {
+                  "name": "Sun",
+                  "value": 90
+                },
+                {
+                  "name": "Sat",
+                  "value": 96
+                },
+                {
+                  "name": "Thu",
+                  "value": 80
+                }
+              ]
+            },
+          ]
+        },
+        {
+          "name": "Wellness",
+            "series": [
+              {
+                "name": "January",
+                "series": [
+                  {
+                    "name": "Sun",
+                    "value": 8
+                  },
+                  {
+                    "name": "Sat",
+                    "value": 7
+                  },
+                  {
+                    "name": "Thu",
+                    "value": 4
+                  },
+                  {
+                    "name": "Wed",
+                    "value": 8
+                  },
+                  {
+                    "name": "Tue",
+                    "value": 2
+                  },
+                  {
+                    "name": "Mon",
+                    "value": 10
+                  }
+                ]
+              },
+            ]
           },
-          {
-            "name": "Sat",
-            "value": 7
-          },
-          {
-            "name": "Thu",
-            "value": 11
-          },
-          {
-            "name": "Wed",
-            "value": 8
-          },
-          {
-            "name": "Tue",
-            "value": 4
-          },
-          {
-            "name": "Mon",
-            "value": 0
-          }
-        ]
-      }
+
     ];
 
     return averageData;
   }
 
-  async getMultiData() {
+  async getAllData() {
     let multi = [
       {
         "name": "Temperature",
@@ -235,9 +331,8 @@ export class ServiceData {
           }
         ]
       },
-
       {
-        "name": "Heart",
+        "name": "Vox2",
         "series": [
           {
             "name": "23-05-2020",
@@ -252,9 +347,26 @@ export class ServiceData {
             "value": 14
           }
         ]
+      },
+      {
+        "name": "Wellness",
+        "series": [
+          {
+            "name": "23-05-2020",
+            "value": 10
+          },
+          {
+            "name": "28-05-2020",
+            "value": 1
+          },
+          {
+            "name": "08-07-2020",
+            "value": 4
+          }
+        ]
       }
     ];
-
     return multi;
   }
+
 }

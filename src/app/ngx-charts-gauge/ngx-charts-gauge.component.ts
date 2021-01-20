@@ -25,12 +25,12 @@ export class NgxChartsGaugeComponent implements OnInit {
   }
   set measure(measure: string) {
     this._measure = measure;
-    console.log(this.measure + "HALOA");
-    this.serviceData.getSingleData()
+    this.serviceData.getLastData()
       .then(response => {
         for (const value of response) {
           if (value.name == measure) {
             this.single = [value];
+            console.log(this.single);
           }
         }
       })
@@ -44,7 +44,6 @@ export class NgxChartsGaugeComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 
   onSelect(data): void {
