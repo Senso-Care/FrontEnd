@@ -313,7 +313,6 @@ export class ServiceData {
           }
         ]
       },
-
       {
         "name": "Humidity",
         "series": [

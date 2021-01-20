@@ -11,7 +11,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { TemperaturePageComponent } from './temperature-page/temperature-page.component';
 import { WellnessPageComponent } from './wellness-page/wellness-page.component';
 import { DatatableComponent } from './datatable/datatable.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -29,7 +28,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppComponent,
     NavMenuComponent,
     HomePageComponent,
-    TemperaturePageComponent,
     WellnessPageComponent,
     DatatableComponent,
     NgxChartsLineChartComponent,

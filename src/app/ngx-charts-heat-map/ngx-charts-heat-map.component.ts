@@ -47,6 +47,16 @@ export class NgxChartsHeatMapComponent implements OnInit {
             this.multi = value.series;
           }
         }
+        if(this.measure == "Humidity") {
+          this.colorScheme = {
+            domain: ['#bcf7f3', '#3dd9eb', '#359ff0', '#104beb']
+          };
+        }
+        if(this.measure == "Vox2") {
+          this.colorScheme = {
+            domain: ['#edf55d','#f7c136', '#f78336', '#f54327']
+          };
+        }
       })
       .catch(error => console.log(error));
   }
@@ -60,15 +70,15 @@ export class NgxChartsHeatMapComponent implements OnInit {
   }
 
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    //console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 

@@ -17,7 +17,7 @@ export class NgxChartsGaugeComponent implements OnInit {
   legend: boolean = true;
   legendPosition: string = 'below';
   colorScheme = {
-    domain: ['#5AA454']
+    domain: ['#acb3c2']
   };
   @Input()
   get measure(): string {
@@ -33,6 +33,21 @@ export class NgxChartsGaugeComponent implements OnInit {
             console.log(this.single);
           }
         }
+        if(this.measure == "Temperature") {
+          this.colorScheme = {
+            domain: ['#5AA454']
+          };
+        }
+        if(this.measure == "Humidity") {
+          this.colorScheme = {
+            domain: ['#247ad6']
+          };
+        }
+        if(this.measure == "Vox2") {
+          this.colorScheme = {
+            domain: ['#e34529']
+          };
+        }
       })
       .catch(error => console.log(error));
   }
@@ -47,15 +62,15 @@ export class NgxChartsGaugeComponent implements OnInit {
   }
 
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    //console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 
 

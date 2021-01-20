@@ -32,7 +32,7 @@ export class NgxChartsLineChartComponent implements OnInit {
   yAxisLabel: string = 'Sensors';
   timeline: boolean = true;
   colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+    domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0']
   };
   @Input()
   get measure(): string {
@@ -42,11 +42,38 @@ export class NgxChartsLineChartComponent implements OnInit {
     this._measure = measure;
     this.serviceData.getAllData()
       .then(response => {
-        for (const value of response) {
-          if (value.name == measure) {
-            this.multi = [value];
+        if(this.measure == "homePage") {
+          console.log("hello");
+          this.multi = response;
+        }
+        else {
+          for (const value of response) {
+            if (value.name == measure) {
+              this.multi = [value];
+            }
+          }
+          if(this.measure == "Temperature") {
+            this.colorScheme = {
+              domain: ['#5AA454']
+            };
+          }
+          else if(this.measure == "Humidity") {
+            this.colorScheme = {
+              domain: ['#247ad6']
+            };
+          }
+          else if(this.measure == "Vox2") {
+            this.colorScheme = {
+              domain: ['#e34529']
+            };
+          }
+          else {
+            this.colorScheme = {
+              domain: ['#acb3c2']
+            };
           }
         }
+
       })
       .catch(error => console.log(error));
   }
@@ -60,14 +87,14 @@ export class NgxChartsLineChartComponent implements OnInit {
   }
 
   onSelect(data): void {
-    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    //console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
   onActivate(data): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
+    //console.log('Activate', JSON.parse(JSON.stringify(data)));
   }
 
   onDeactivate(data): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+    //console.log('Deactivate', JSON.parse(JSON.stringify(data)));
   }
 }
