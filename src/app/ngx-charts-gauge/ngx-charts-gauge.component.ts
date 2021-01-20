@@ -48,6 +48,11 @@ export class NgxChartsGaugeComponent implements OnInit {
             domain: ['#e34529']
           };
         }
+        if(this.measure == "Wellness") {
+          this.colorScheme = {
+            domain: ['#b762f0']
+          };
+        }
       })
       .catch(error => console.log(error));
   }

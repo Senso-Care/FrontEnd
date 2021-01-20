@@ -67,6 +67,11 @@ export class NgxChartsLineChartComponent implements OnInit {
               domain: ['#e34529']
             };
           }
+          else if(this.measure == "Wellness") {
+            this.colorScheme = {
+              domain: ['#b762f0']
+            };
+          }
           else {
             this.colorScheme = {
               domain: ['#acb3c2']

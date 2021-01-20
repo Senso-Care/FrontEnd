@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./wellness-page.component.scss']
 })
 export class WellnessPageComponent implements OnInit {
-
+  measure = "Wellness";
   constructor() { }
 
   ngOnInit(): void {

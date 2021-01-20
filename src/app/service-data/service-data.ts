@@ -37,7 +37,7 @@ export class ServiceData {
       },
       {
         "name": "Wellness",
-        "value": 8
+        "value": 10
       },
     ];
 

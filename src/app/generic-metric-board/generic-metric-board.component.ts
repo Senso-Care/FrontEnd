@@ -8,7 +8,7 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class GenericMetricBoardComponent implements OnInit {
 
-  measure = "generic"
+  measure = "generic";
 
   constructor(public router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
