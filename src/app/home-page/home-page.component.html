@@ -1,9 +1,9 @@
+<app-filters-panel [measure]="this.measure" [docDefinition]="this.docDefinition()"></app-filters-panel>
 <div id="intro">
   <span>Your home measures</span>
 </div>
 <div class="container">
-  <button (click)="downloadChart()">Download PDF</button>
-  <div id="lineChart" class="row" style="display: flex; justify-content: center; align-items: center;">
-    <app-ngx-charts-line-chart [measure]="this.measure"></app-ngx-charts-line-chart>
-  </div>
+    <div class="row" style="display: flex; justify-content: center; align-items: center;">
+      <app-ngx-charts-line-chart id="lineChart" [measure]="this.measure"></app-ngx-charts-line-chart>
+    </div>
 </div>

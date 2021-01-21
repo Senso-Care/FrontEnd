@@ -19,9 +19,9 @@ export class NgxChartsLineChartComponent implements OnInit {
       ]
     }
   ];
-  view: any[] = [700, 300];
+  view: any[] = [600, 200];
   // options
-  legend: boolean = false;
+  legend: boolean = true;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
@@ -42,8 +42,7 @@ export class NgxChartsLineChartComponent implements OnInit {
     this._measure = measure;
     this.serviceData.getAllData()
       .then(response => {
-        if(this.measure == "homePage") {
-          this.legend = true;
+        if(this.measure == "all") {
           this.multi = response;
         }
         else {

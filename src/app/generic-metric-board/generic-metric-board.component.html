@@ -1,3 +1,4 @@
+<app-filters-panel [measure]="this.measure" [docDefinition]="this.docDefinition"></app-filters-panel>
 <div id="title">
   <span>{{this.measure}}</span>
 </div>
@@ -5,7 +6,7 @@
   <div class="row" style="display: flex; justify-content: center; align-items: center;">
     <app-ngx-charts-gauge [measure]="this.measure"></app-ngx-charts-gauge>
   </div>
-  <div class="row" style="display: flex; justify-content: center; align-items: center;">
+  <div id="lineChart" class="row" style="display: flex; justify-content: center; align-items: center;">
     <app-ngx-charts-line-chart [measure]="this.measure"></app-ngx-charts-line-chart>
   </div>
   <div class="row" style="display: flex; justify-content: center; align-items: center;">

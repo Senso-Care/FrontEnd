@@ -13,7 +13,7 @@ export class NgxChartsGaugeComponent implements OnInit {
       "value": 0
     }
   ];
-  //view: any[] = [500, 400];
+  //view: any[] = [400, 300];
   legend: boolean = true;
   legendPosition: string = 'below';
   colorScheme = {
