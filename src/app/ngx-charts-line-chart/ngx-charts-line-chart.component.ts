@@ -21,7 +21,7 @@ export class NgxChartsLineChartComponent implements OnInit {
   ];
   view: any[] = [700, 300];
   // options
-  legend: boolean = true;
+  legend: boolean = false;
   showLabels: boolean = true;
   animations: boolean = true;
   xAxis: boolean = true;
@@ -29,7 +29,7 @@ export class NgxChartsLineChartComponent implements OnInit {
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Time';
-  yAxisLabel: string = 'Sensors';
+  yAxisLabel: string = 'Values';
   timeline: boolean = true;
   colorScheme = {
     domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0']
@@ -43,7 +43,7 @@ export class NgxChartsLineChartComponent implements OnInit {
     this.serviceData.getAllData()
       .then(response => {
         if(this.measure == "homePage") {
-          console.log("hello");
+          this.legend = true;
           this.multi = response;
         }
         else {
