@@ -29,8 +29,8 @@ export class GenericMetricBoardComponent implements OnInit {
     return async () => {
       const chart = document.getElementById('lineChart');
       const canvas: HTMLCanvasElement = await html2canvas(chart, {
-        height: 600,
-        width: 1550,
+        height: 650,
+        width: 1600,
         scale: 3,
         backgroundColor: null,
         logging: true,

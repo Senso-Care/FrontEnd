@@ -8,11 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class DatatableComponent implements OnInit {
 
   rows = [
-    { name: 'Austin', gender: 'Male', company: 'Swimlane' },
-    { name: 'Dany', gender: 'Male', company: 'KFC' },
-    { name: 'Molly', gender: 'Female', company: 'Burger King' }
+    { measure: 'Austin', date: 'Male', value: 'Swimlane' },
   ];
-  columns = [{ prop: 'name' }, { name: 'Gender' }, { name: 'Company' }];
+  columns = [{ prop: 'Measure' }, { name: 'Date' }, { name: 'Value' }];
 
   constructor() { }
 

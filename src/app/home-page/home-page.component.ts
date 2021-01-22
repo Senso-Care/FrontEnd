@@ -11,7 +11,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent implements OnInit {
-  measure = "all";
+  measure = "All_sensors";
   canvas: any;
   constructor(private serviceData: ServiceData) { }
 
@@ -21,8 +21,8 @@ export class HomePageComponent implements OnInit {
     return async () => {
       const chart = document.getElementById('lineChart');
       const canvas: HTMLCanvasElement = await html2canvas(chart, {
-        height: 600,
-        width: 1550,
+        height: 650,
+        width: 1600,
         scale: 3,
         backgroundColor: null,
         logging: true,
@@ -66,7 +66,7 @@ export class HomePageComponent implements OnInit {
       };
       // Add some content to the pdf
       const title = { text: "Home data provided by Senso'Care", style: 'subheader' };
-      const description = { text: 'Line charts with ' + measure + ' measures', style: 'subsubheader' };
+      const description = { text: 'Line charts with all measures', style: 'subsubheader' };
       docDefinition.content.push(title);
       docDefinition.content.push(description);
       // Push image of the chart

@@ -42,7 +42,7 @@ export class NgxChartsLineChartComponent implements OnInit {
     this._measure = measure;
     this.serviceData.getAllData()
       .then(response => {
-        if(this.measure == "all") {
+        if(this.measure == "All_sensors") {
           this.multi = response;
         }
         else {
