@@ -3,7 +3,6 @@ import { ServiceData } from '../service-data/service-data';
 import html2canvas from 'html2canvas';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
-import { DomSanitizer } from '@angular/platform-browser';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -72,8 +71,6 @@ export class HomePageComponent implements OnInit {
       docDefinition.content.push(description);
       // Push image of the chart
       docDefinition.content.push({ image: chartData, width: 1000 });
-      //this.docDefinition = docDefinition;
-      // pdfMake.createPdf(docDefinition).download('chartToPdf' + '.pdf');
       return docDefinition;
     }
   }

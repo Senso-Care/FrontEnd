@@ -15,6 +15,8 @@ export class NgxChartsGaugeComponent implements OnInit {
   ];
   //view: any[] = [400, 300];
   legend: boolean = true;
+  min = -10;
+  max = 60;
   legendPosition: string = 'below';
   colorScheme = {
     domain: ['#acb3c2']
@@ -49,6 +51,8 @@ export class NgxChartsGaugeComponent implements OnInit {
           };
         }
         if(this.measure == "Wellness") {
+          this.min = 0;
+          this.max = 20;
           this.colorScheme = {
             domain: ['#b762f0']
           };
