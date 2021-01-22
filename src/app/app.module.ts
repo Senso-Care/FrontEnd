@@ -52,6 +52,9 @@ import { FiltersPanelComponent } from './filters-panel/filters-panel.component';
     NgxChartsModule,
     NgbModule,
   ],
+  exports: [
+    MatButtonModule
+  ],
   providers: [
     ServiceData
   ],

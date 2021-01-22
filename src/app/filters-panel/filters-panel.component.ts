@@ -1,4 +1,5 @@
 import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
+import { MatButtonModule } from '@angular/material/button';
 import { Component, Input, OnInit } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
