@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { ValueTransformer } from '@angular/compiler/src/util';
+import { Component, Input, OnInit } from '@angular/core';
+import { ServiceData } from '../service-data/service-data';
+import { Measure } from './measure.interface';
 
 @Component({
   selector: 'app-datatable',
@@ -6,29 +9,54 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./datatable.component.scss']
 })
 export class DatatableComponent implements OnInit {
-
-  /*rows = [
-    { measure: 'Austin', date: 'Male', value: 'Swimlane' },
-  ];
-  columns = [{ prop: 'Measure' }, { name: 'Date' }, { name: 'Value' }];*/
-  rows: any[];
+  rows: Measure[] = [];
   cols: any[];
+  @Input()
+  get measure(): string {
+    return this._measure;
+  }
+  set measure(measure: string) {
+    this._measure = measure;
+    this.serviceData.getAllData()
+      .then(response => {
+        if (this.measure == "All_sensors") {
+          for (const value of response) {
+            for (const serie of value.series) {
+              this.rows.push({
+                measure: value.name,
+                date: serie.name,
+                value: serie.value
+              });
+            }
+          }
+        }
+        else {
+          for (const value of response) {
+            if (value.name == measure) {
+              for (const serie of value.series) {
+                this.rows.push({
+                  measure: value.name,
+                  date: serie.name,
+                  value: serie.value
+                });
+              }
+            }
+          }
+        }
 
-  constructor() { }
+      })
+      .catch(error => console.log(error));
+  }
+  private _measure: string;
+
+  constructor(private serviceData: ServiceData) { }
 
   ngOnInit(): void {
-    this.rows = [
-      { measure: '1', date: 'kiran', value:'kiran@gmail.com' },
-      { measure: '2', date: 'tom', value:'tom@gmail.com' },
-      { measure: '3', date: 'john', value:'john@gmail.com' },
-      { measure: '4', date: 'Frank', value:'frank@gmail.com' },
-
-  ];
     this.cols = [
       { field: 'measure', header: 'Measure' },
       { field: 'date', header: 'Date' },
       { field: 'value', header: 'Value' },
-  ];
+    ];
   }
 
 }
