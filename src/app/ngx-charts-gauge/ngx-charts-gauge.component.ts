@@ -37,7 +37,7 @@ export class NgxChartsGaugeComponent implements OnInit {
         }
         if(this.measure == "Temperature") {
           this.colorScheme = {
-            domain: ['#5AA454']
+            domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0']
           };
         }
         if(this.measure == "Humidity") {

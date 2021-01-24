@@ -23,6 +23,7 @@ import { ServiceData } from './service-data/service-data';
 import { GenericMetricBoardComponent } from './generic-metric-board/generic-metric-board.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FiltersPanelComponent } from './filters-panel/filters-panel.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { FiltersPanelComponent } from './filters-panel/filters-panel.component';
     FormsModule,
     NgxChartsModule,
     NgbModule,
+    TableModule
   ],
   exports: [
     MatButtonModule
