@@ -21,20 +21,32 @@ export class WellnessPageComponent implements OnInit {
     const measure = this.measure;
     return async () => {
       const chart = document.getElementById('lineChart');
-      const canvas: HTMLCanvasElement = await html2canvas(chart, {
+       const chartPromise = html2canvas(chart, {
         height: 650,
         width: 1600,
-        scale: 3,
+        scale: 2,
         backgroundColor: null,
         logging: true,
         onclone: (document) => {
           document.getElementById('lineChart').style.visibility = 'visible';
         }
       });
-
+      const table = document.getElementById('datatable');
+      const tablePromise = html2canvas(table, {
+        height: 650,
+        width: 1600,
+        scale: 2,
+        backgroundColor: null,
+        logging: true,
+        onclone: (document) => {
+          document.getElementById('datatable').style.visibility = 'visible';
+        }
+      });
+      const canvas: HTMLCanvasElement = await chartPromise;
+      const canvasTable: HTMLCanvasElement = await tablePromise;
       // Get chart data so we can append to the pdf
       const chartData = canvas.toDataURL();
-
+      const tableData = canvasTable.toDataURL();
       // Prepare pdf structure
       const docDefinition = {
         content: [],
@@ -67,11 +79,12 @@ export class WellnessPageComponent implements OnInit {
       };
       // Add some content to the pdf
       const title = { text: "Home data provided by Senso'Care", style: 'subheader' };
-      const description = { text: 'Line charts with Wellness measures', style: 'subsubheader' };
+      const description = { text: 'Wellness measures', style: 'subsubheader' };
       docDefinition.content.push(title);
       docDefinition.content.push(description);
       // Push image of the chart
       docDefinition.content.push({ image: chartData, width: 1000 });
+      docDefinition.content.push({image: tableData, width: 1000});
       return docDefinition;
     }
   }

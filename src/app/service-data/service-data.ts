@@ -310,6 +310,14 @@ export class ServiceData {
           {
             "name": "08-07-2020",
             "value": 28
+          },
+          {
+            "name": "22-12-2020",
+            "value": 10
+          },
+          {
+            "name": "25-12-2020",
+            "value": 4
           }
         ]
       },
@@ -361,6 +369,14 @@ export class ServiceData {
           {
             "name": "08-07-2020",
             "value": 4
+          },
+          {
+            "name": "22-12-2020",
+            "value": 6
+          },
+          {
+            "name": "24-12-2020",
+            "value": 10
           }
         ]
       }

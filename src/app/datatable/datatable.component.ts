@@ -1,5 +1,5 @@
 import { ValueTransformer } from '@angular/compiler/src/util';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ServiceData } from '../service-data/service-data';
 import { Measure } from './measure.interface';
 
@@ -11,10 +11,16 @@ import { Measure } from './measure.interface';
 export class DatatableComponent implements OnInit {
   rows: Measure[] = [];
   cols: any[];
+  exportColumns: any;
+  measures: any;
   @Input()
   get measure(): string {
     return this._measure;
   }
+
+  @ViewChild("table")
+  table;
+
   set measure(measure: string) {
     this._measure = measure;
     this.serviceData.getAllData()
@@ -43,7 +49,7 @@ export class DatatableComponent implements OnInit {
             }
           }
         }
-
+        this.table.reset();
       })
       .catch(error => console.log(error));
   }
@@ -58,5 +64,4 @@ export class DatatableComponent implements OnInit {
       { field: 'value', header: 'Value' },
     ];
   }
-
 }
