@@ -5,3 +5,19 @@
   height: 200px;
   line-height: 200px;
 }
+
+#buttons {
+  font-size: 20px;
+  display: table;
+  margin: 0 auto;
+}
+
+#inner {
+  font-size: 20px;
+}
+
+#outer {
+  width:100%;
+  display: flex;
+  justify-content: center;
+}

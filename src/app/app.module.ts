@@ -24,6 +24,8 @@ import { GenericMetricBoardComponent } from './generic-metric-board/generic-metr
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FiltersPanelComponent } from './filters-panel/filters-panel.component';
 import { TableModule } from 'primeng/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { TableModule } from 'primeng/table';
     FormsModule,
     NgxChartsModule,
     NgbModule,
-    TableModule
+    TableModule,
+    MatInputModule,
+    MatSelectModule,
   ],
   exports: [
     MatButtonModule
