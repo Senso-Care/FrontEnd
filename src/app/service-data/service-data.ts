@@ -52,148 +52,103 @@ export class ServiceData {
         "name": "Temperature",
         "series": [
           {
-            "name": "May",
+            "name": "Monday",
             "series": [
               {
-                "name": "Sun",
-                "value": 20
-              },
-              {
-                "name": "Sat",
-                "value": 25
-              },
-              {
-                "name": "Thu",
-                "value": 27
-              },
-              {
-                "name": "Wed",
-                "value": 32
-              },
-              {
-                "name": "Tue",
-                "value": 24
-              },
-              {
-                "name": "Mon",
-                "value": 22
-              }
-            ]
-          },
-          {
-            "name": "June",
-            "series": [
-              {
-                "name": "Sun",
+                "name": "00",
                 "value": 22
               },
               {
-                "name": "Sat",
-                "value": 24
-              },
-              {
-                "name": "Thu",
-                "value": 27
-              },
-              {
-                "name": "Wed",
-                "value": 26
-              },
-              {
-                "name": "Tue",
-                "value": 28
-              },
-              {
-                "name": "Mon",
-                "value": 25
-              }
-            ]
-          },
-
-          {
-            "name": "July",
-            "series": [
-              {
-                "name": "Sun",
-                "value": 25
-              },
-              {
-                "name": "Sat",
-                "value": 26
-              },
-              {
-                "name": "Thu",
-                "value": 33
-              },
-              {
-                "name": "Wed",
-                "value": 32
-              },
-              {
-                "name": "Tue",
-                "value": 30
-              },
-              {
-                "name": "Mon",
-                "value": 34
-              }
-            ]
-          },
-          {
-            "name": "September",
-            "series": [
-              {
-                "name": "Sun",
-                "value": 15
-              },
-              {
-                "name": "Sat",
-                "value": 16
-              },
-              {
-                "name": "Thu",
+                "name": "01",
                 "value": 20
               },
               {
-                "name": "Wed",
-                "value": 17
+                "name": "02",
+                "value": 25
               },
               {
-                "name": "Tue",
-                "value": 13
+                "name": "03",
+                "value": 27
               },
               {
-                "name": "Mon",
-                "value": 18
+                "name": "04",
+                "value": 32
+              },
+              {
+                "name": "05",
+                "value": 24
+              },
+              {
+                "name": "06",
+                "value": 22
+              },
+              {
+                "name": "07",
+                "value": 20
+              },
+              {
+                "name": "08",
+                "value": 25
+              },
+              {
+                "name": "09",
+                "value": 27
+              },
+              {
+                "name": "10",
+                "value": 32
+              },
+              {
+                "name": "11",
+                "value": 24
+              },
+              {
+                "name": "12",
+                "value": 22
               }
-            ]
-          },
-          {
-            "name": "Decembre",
-            "series": [
+              ,
               {
-                "name": "Sun",
-                "value": 5
+                "name": "13",
+                "value": 20
               },
               {
-                "name": "Sat",
-                "value": 7
+                "name": "14",
+                "value": 25
               },
               {
-                "name": "Thu",
-                "value": 11
+                "name": "15",
+                "value": 27
               },
               {
-                "name": "Wed",
-                "value": 8
+                "name": "16",
+                "value": 32
               },
               {
-                "name": "Tue",
-                "value": 4
+                "name": "17",
+                "value": 24
               },
               {
-                "name": "Mon",
-                "value": 0
+                "name": "18",
+                "value": 22
+              },
+              {
+                "name": "19",
+                "value": 27
+              },
+              {
+                "name": "20",
+                "value": 32
+              },
+              {
+                "name": "21",
+                "value": 24
+              },
+              {
+                "name": "22",
+                "value": 22
+              },{
+                "name": "23",
+                "value": 22
               }
             ]
           }

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ServiceData } from '../service-data/service-data';
+import { DefaultService, Metric, SensorData } from 'src/modules/angular';
 
 @Component({
   selector: 'app-ngx-charts-gauge',
@@ -7,7 +8,7 @@ import { ServiceData } from '../service-data/service-data';
   styleUrls: ['./ngx-charts-gauge.component.scss']
 })
 export class NgxChartsGaugeComponent implements OnInit {
-  single = [
+  single: any = [
     {
       "name": "NoData",
       "value": 0
@@ -19,7 +20,7 @@ export class NgxChartsGaugeComponent implements OnInit {
   max = 60;
   legendPosition: string = 'below';
   colorScheme = {
-    domain: ['#acb3c2']
+    domain: ['#5AA454']
   };
   @Input()
   get measure(): string {
@@ -27,43 +28,28 @@ export class NgxChartsGaugeComponent implements OnInit {
   }
   set measure(measure: string) {
     this._measure = measure;
-    this.serviceData.getLastData()
-      .then(response => {
-        for (const value of response) {
-          if (value.name == measure) {
-            this.single = [value];
-            console.log(this.single);
-          }
+    this.api.getLastMetrics(measure.toLowerCase(), '7d').subscribe(
+      (result: SensorData[]) => {
+        this.single = [];
+        for (const sensor of result) {
+          console.log(sensor.name);
+          /*if(sensor.name.toLowerCase().startsWith("temperature")) {
+            this.colorScheme = {
+              domain: ['#5AA454']
+            };
+          }*/
+          this.single = [{
+            name: new Date(sensor.series[0].date),
+            value: sensor.series[0].value
+          }];
         }
-        if(this.measure == "Temperature") {
-          this.colorScheme = {
-            domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0']
-          };
-        }
-        if(this.measure == "Humidity") {
-          this.colorScheme = {
-            domain: ['#247ad6']
-          };
-        }
-        if(this.measure == "Vox2") {
-          this.colorScheme = {
-            domain: ['#e34529']
-          };
-        }
-        if(this.measure == "Wellness") {
-          this.min = 0;
-          this.max = 20;
-          this.colorScheme = {
-            domain: ['#b762f0']
-          };
-        }
-      })
-      .catch(error => console.log(error));
+      }
+    );
   }
   private _measure: string;
 
 
-  constructor(private serviceData: ServiceData) {
+  constructor(private api: DefaultService) {
     Object.assign(this.single);
   }
 

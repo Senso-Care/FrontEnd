@@ -34,7 +34,7 @@ export class NgxChartsLineChartComponent implements OnInit {
   timeline: boolean = true;
   autoscale: boolean = true;
   colorScheme = {
-    domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0']
+    domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0', '#acb3c2', "#8132a8", "#f59714", "#fa93fa", "#a3eb6c", "#6de8e8"]
   };
 
   @Input()
@@ -43,66 +43,23 @@ export class NgxChartsLineChartComponent implements OnInit {
   }
   set measure(measure: string) {
     this._measure = measure;
-    this.api.getMetricsFromType(measure.toLowerCase(), '80d').subscribe(
+    this.api.getMetricsFromType(measure.toLowerCase(), '7d').subscribe(
       (result: Metric) => {
-        if (this.measure == "All_sensors") {
-          //this.multi = result.sensors;
-        }
-        else {
-
-          //this.multi = result.sensors.map((obj: SensorData) => {
-          //  return { name: obj.name, series: obj.series.map(data => { return { name: data.date, value: data.value } }) }
-          //});
-          this.multi = [];
-          for (const sensor of result.sensors) {
-            const series = {
-              name: sensor.name || 'Unknown',
-              series: sensor.series.map(obj => {
-                return {
-                  name: new Date(obj.date),
-                  value: obj.value
-                }
-              })
-            }
-            this.multi.push(series);
+        this.multi = [];
+        for (const sensor of result.sensors) {
+          const series = {
+            name: sensor.name || 'Unknown',
+            series: sensor.series.map(obj => {
+              return {
+                name: new Date(obj.date),
+                value: obj.value
+              }
+            })
           }
-          console.log(this.multi);
-          //this.multi = result.sensors;
-
-          /*if (this.measure == "Temperature") {
-            this.colorScheme = {
-              domain: ['#5AA454']
-            };
-          }
-          else if (this.measure == "Humidity") {
-            this.colorScheme = {
-              domain: ['#247ad6']
-            };
-          }
-          else if (this.measure == "Vox2") {
-            this.colorScheme = {
-              domain: ['#e34529']
-            };
-          }
-          else if (this.measure == "Wellness") {
-            this.colorScheme = {
-              domain: ['#b762f0']
-            };
-          }
-          else {
-            this.colorScheme = {
-              domain: ['#acb3c2']
-            };
-          }*/
+          this.multi.push(series);
         }
       }
     );
-    /*this.serviceData.getAllData()
-      .then(response => {
-
-
-      })
-      .catch(error => console.log(error));*/
   }
   private _measure: string;
 

@@ -1,6 +1,7 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ServiceData } from '../service-data/service-data';
+import { DefaultService, Metric, SensorData } from 'src/modules/angular';
 
 @Component({
   selector: 'app-ngx-charts-heat-map',
@@ -29,8 +30,8 @@ export class NgxChartsHeatMapComponent implements OnInit {
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
-  xAxisLabel: string = 'Months';
-  yAxisLabel: string = 'Days';
+  xAxisLabel: string = 'Days';
+  yAxisLabel: string = 'Hours';
   colorScheme = {
     domain: ['#4236c9','#4d9ce5', '#34b8f9', '#23c175', '#e5c84d', '#f98d34', '#f95c34', '#f93434']
   };
@@ -39,30 +40,47 @@ export class NgxChartsHeatMapComponent implements OnInit {
     return this._measure;
   }
   set measure(measure: string) {
+    /*
     this._measure = measure;
-    this.serviceData.getAverageData()
-      .then(response => {
-        for (const value of response) {
-          if (value.name == measure) {
-            this.multi = value.series;
+    this.api.getMetricsFromType(measure.toLowerCase(), '60d').subscribe(
+      (result: Metric) => {
+        this.multi = [];
+        for (const sensor of result.sensors) {
+          if (sensor.name.startsWith("Humidity" || "humidity")) {
+            this.colorScheme = {
+              domain: ['#bcf7f3', '#3dd9eb', '#359ff0', '#104beb']
+            };
           }
+          else if (sensor.name.startsWith("Vox2" || "vox2")) {
+            this.colorScheme = {
+              domain: ['#edf55d','#f7c136', '#f78336', '#f54327']
+            };
+          }
+          else if (sensor.name.startsWith("Wellness" || "wellness")) {
+            this.colorScheme = {
+              domain: ['#b762f0']
+            };
+          }
+          const series = {
+            name: sensor.name || 'Unknown',
+            series: sensor.series.map(obj => {
+              return {
+                name: new Date(obj.date),
+                value: obj.value
+              }
+            })
+          }
+          this.multi.push(series);
         }
-        if(this.measure == "Humidity") {
-          this.colorScheme = {
-            domain: ['#bcf7f3', '#3dd9eb', '#359ff0', '#104beb']
-          };
+        if (this.measure == "All_sensors") {
+          //this.multi = result.sensors;
         }
-        if(this.measure == "Vox2") {
-          this.colorScheme = {
-            domain: ['#edf55d','#f7c136', '#f78336', '#f54327']
-          };
-        }
-      })
-      .catch(error => console.log(error));
+      }
+    );*/
   }
   private _measure: string;
 
-  constructor(private serviceData : ServiceData) {
+  constructor(private api: DefaultService) {
     Object.assign(this.multi);
   }
 

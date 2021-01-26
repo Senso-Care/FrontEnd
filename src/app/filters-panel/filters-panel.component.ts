@@ -12,7 +12,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class FiltersPanelComponent implements OnInit {
   range = [
-    "Last 2 hour",
+    "Last 2 hours",
     "Last 10 hours",
     "Last 24 hours",
     "Last 3 days",
