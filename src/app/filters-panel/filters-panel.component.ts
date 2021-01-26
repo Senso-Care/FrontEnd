@@ -1,5 +1,6 @@
 import { DIR_DOCUMENT_FACTORY } from '@angular/cdk/bidi/dir-document-token';
 import { MatButtonModule } from '@angular/material/button';
+import { Output, EventEmitter } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -11,13 +12,37 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
   styleUrls: ['./filters-panel.component.scss']
 })
 export class FiltersPanelComponent implements OnInit {
-  range = [
-    "Last 2 hours",
-    "Last 10 hours",
-    "Last 24 hours",
-    "Last 3 days",
-    "Last 7 days"
+  range = [{
+    text: "Last 2 hours",
+    value: "2h"
+  },
+  {
+    text: "Last 10 hours",
+    value: "10h"
+  },
+  {
+    text: "Last 24 hours",
+    value: "24h"
+  },
+  {
+    text: "Last 3 days",
+    value: "3d"
+  },
+  {
+    text: "Last 7 days",
+    value: "7d"
+  }
   ];
+  _selectedRange: string = "24h";
+  get selectedRange(): string {
+    return this._selectedRange
+  }
+  set selectedRange(range: string) {
+    this._selectedRange = range;
+    this.onSelectedRange.emit(this._selectedRange);
+  }
+  @Output() onSelectedRange = new EventEmitter<string>();
+
   @Input()
   get measure(): string {
     return this._measure;
@@ -35,6 +60,7 @@ export class FiltersPanelComponent implements OnInit {
     this._docDefinition = docDefinition;
   }
   private _docDefinition: any;
+
 
   constructor() { }
 

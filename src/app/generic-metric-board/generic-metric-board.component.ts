@@ -13,6 +13,7 @@ import html2canvas from 'html2canvas';
 export class GenericMetricBoardComponent implements OnInit {
 
   measure = "generic";
+  range = "1d";
   constructor(public router: Router) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => {
       return false;
@@ -21,6 +22,10 @@ export class GenericMetricBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  rangeChanged(range: string) {
+    this.range = range;
   }
 
   docDefinition() {

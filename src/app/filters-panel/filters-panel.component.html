@@ -5,9 +5,9 @@
     margin-top: 2em;
     margin-left: 1em;">
       <mat-label>Time</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let time of range" [value]="time">
-          {{time}}
+      <mat-select [(ngModel)]="selectedRange" >
+        <mat-option *ngFor="let time of range" [value]="time.value">
+          {{time.text}}
         </mat-option>
       </mat-select>
     </mat-form-field>

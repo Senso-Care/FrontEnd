@@ -33,7 +33,7 @@ export class ServiceData {
         "value": 12
       },
       {
-        "name": "Vox2",
+        "name": "Sound",
         "value": 98
       },
       {
@@ -189,7 +189,7 @@ export class ServiceData {
         ]
       },
       {
-        "name": "Vox2",
+        "name": "Sound",
           "series": [
             {
               "name": "January",
@@ -295,7 +295,7 @@ export class ServiceData {
         ]
       },
       {
-        "name": "Vox2",
+        "name": "Sound",
         "series": [
           {
             "name": "23-05-2020",

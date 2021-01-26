@@ -12,7 +12,7 @@ import { ServiceData } from '../service-data/service-data';
 export class NavMenuComponent {
 
 
-  metrics = ["Temperature", "Humidity", "Vox2"]
+  metrics = ["Temperature", "Humidity", "Sound"]
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

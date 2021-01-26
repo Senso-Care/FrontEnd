@@ -1,5 +1,6 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { DefaultService, Metric, SensorData } from 'src/modules/angular';
 import { ServiceData } from '../service-data/service-data';
 
@@ -34,8 +35,17 @@ export class NgxChartsLineChartComponent implements OnInit {
   timeline: boolean = true;
   autoscale: boolean = true;
   colorScheme = {
-    domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0', '#acb3c2', "#8132a8", "#f59714", "#fa93fa", "#a3eb6c", "#6de8e8"]
+    domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0', '#acb3c2', "#f59714", "#fa93fa", "#a3eb6c", "#6de8e8"]
   };
+  _range: string;
+  @Input()
+  get range() : string {
+    return this._range;
+  }
+  set range(value: string) {
+    this._range = value;
+    this.getMeasures(this.measure, this.range);
+  }
 
   @Input()
   get measure(): string {
@@ -43,7 +53,19 @@ export class NgxChartsLineChartComponent implements OnInit {
   }
   set measure(measure: string) {
     this._measure = measure;
-    this.api.getMetricsFromType(measure.toLowerCase(), '7d').subscribe(
+    this.getMeasures(this.measure, this.range);
+  }
+  private _measure: string;
+
+  subscription: Subscription;
+
+  getMeasures(measure: string, range: string) {
+    if (measure == null || range == null)
+      return;
+    if (this.subscription != null) {
+      this.subscription.unsubscribe();
+    }
+    this.subscription = this.api.getMetricsFromType(measure.toLowerCase(), range).subscribe(
       (result: Metric) => {
         this.multi = [];
         for (const sensor of result.sensors) {
@@ -61,7 +83,6 @@ export class NgxChartsLineChartComponent implements OnInit {
       }
     );
   }
-  private _measure: string;
 
   constructor(private api: DefaultService) {
     Object.assign(this.multi);

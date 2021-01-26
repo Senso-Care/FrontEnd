@@ -17,10 +17,10 @@ export class DatatableComponent implements OnInit {
   get measure(): string {
     return this._measure;
   }
-
+  @Input()
+  range: string;
   @ViewChild("table")
   table;
-
   set measure(measure: string) {
     this._measure = measure;
     this.serviceData.getAllData()

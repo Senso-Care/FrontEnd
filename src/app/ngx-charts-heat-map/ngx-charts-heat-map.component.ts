@@ -36,13 +36,15 @@ export class NgxChartsHeatMapComponent implements OnInit {
     domain: ['#4236c9','#4d9ce5', '#34b8f9', '#23c175', '#e5c84d', '#f98d34', '#f95c34', '#f93434']
   };
   @Input()
+  range: string;
+  @Input()
   get measure(): string {
     return this._measure;
   }
   set measure(measure: string) {
     /*
     this._measure = measure;
-    this.api.getMetricsFromType(measure.toLowerCase(), '60d').subscribe(
+    this.api.getMetricsFromType(measure.toLowerCase(), this.range).subscribe(
       (result: Metric) => {
         this.multi = [];
         for (const sensor of result.sensors) {
