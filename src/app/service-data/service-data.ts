@@ -1,4 +1,5 @@
 import { Injectable, Optional } from '@angular/core';
+import { ApiModule, DefaultService } from 'src/modules/angular';
 //import { HttpClient } from '@angular/common/http';
 
 export interface DataInfo {
@@ -14,7 +15,7 @@ export class ServiceData {
 
   }*/
 
-  constructor() {
+  constructor(private api: DefaultService) {
   }
 
   async getLastData() {

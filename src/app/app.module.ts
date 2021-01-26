@@ -26,6 +26,8 @@ import { FiltersPanelComponent } from './filters-panel/filters-panel.component';
 import { TableModule } from 'primeng/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { ApiModule, BASE_PATH } from '../modules/angular';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -57,12 +59,15 @@ import { MatSelectModule } from '@angular/material/select';
     TableModule,
     MatInputModule,
     MatSelectModule,
+    ApiModule,
+    HttpClientModule,
   ],
   exports: [
     MatButtonModule
   ],
   providers: [
-    ServiceData
+    ServiceData,
+    {provide: BASE_PATH, useValue: 'http://127.0.0.1:8080'}
   ],
   bootstrap: [AppComponent]
 })
