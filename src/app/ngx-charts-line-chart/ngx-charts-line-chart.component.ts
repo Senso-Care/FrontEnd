@@ -68,6 +68,8 @@ export class NgxChartsLineChartComponent implements OnInit {
     this.subscription = this.api.getMetricsFromType(measure.toLowerCase(), range).subscribe(
       (result: Metric) => {
         this.multi = [];
+        if (result.sensors == null)
+          return;
         for (const sensor of result.sensors) {
           const series = {
             name: sensor.name || 'Unknown',

@@ -12,9 +12,15 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 })
 export class WellnessPageComponent implements OnInit {
   measure = "Wellness";
+  range = "1d";
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+
+  rangeChanged(range: string) {
+    this.range = range;
   }
 
   docDefinition() {
@@ -88,5 +94,7 @@ export class WellnessPageComponent implements OnInit {
       return docDefinition;
     }
   }
+
+  onUpload() {}
 
 }

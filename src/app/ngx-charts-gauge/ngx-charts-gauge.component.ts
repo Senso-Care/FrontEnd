@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ServiceData } from '../service-data/service-data';
 import { DefaultService, Metric, SensorData } from 'src/modules/angular';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-ngx-charts-gauge',
@@ -25,17 +26,40 @@ export class NgxChartsGaugeComponent implements OnInit {
     domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0', '#acb3c2', "#f59714", "#fa93fa", "#a3eb6c", "#6de8e8"]
   };
   @Input()
-  range: string;
+  get range() : string {
+    return this._range;
+  }
+  set range(value: string) {
+    this._range = value;
+    this.getMeasures(this.measure, this.range);
+  }
+  private _range: string;
+
+
   @Input()
   get measure(): string {
     return this._measure;
   }
   set measure(measure: string) {
     this._measure = measure;
+    this.getMeasures(this.measure, this.range);
+  }
+  private _measure: string;
+
+  subscription: Subscription;
+
+  getMeasures(measure: string, range: string) {
+    if (measure == null || range == null)
+      return;
+    if (this.subscription != null) {
+      this.subscription.unsubscribe();
+    }
+    this._measure = measure;
     this.api.getLastMetrics(measure.toLowerCase(), this.range).subscribe(
       (result: SensorData[]) => {
         const values = [];
         this.sum = 0;
+        this.mean = 0;
         for (const sensor of result) {
           console.log(sensor.name);
           /*if(sensor.name.toLowerCase().startsWith("temperature")) {
@@ -57,7 +81,7 @@ export class NgxChartsGaugeComponent implements OnInit {
       }
     );
   }
-  private _measure: string;
+
 
 
   constructor(private api: DefaultService) {
@@ -65,6 +89,7 @@ export class NgxChartsGaugeComponent implements OnInit {
   }
 
   valueFormatting = (value: number): number => {
+    if (value == 0) return 0.001
     if (value != this.sum)
       return value;
     return this.mean;

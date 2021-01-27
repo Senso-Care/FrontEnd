@@ -1,4 +1,4 @@
-<app-filters-panel [measure]="this.measure" [docDefinition]="this.docDefinition()"></app-filters-panel>
+<app-filters-panel (onSelectedRange)="rangeChanged($event)" [measure]="this.measure" [docDefinition]="this.docDefinition()"></app-filters-panel>
 <div id="title">
   <span>Wellness</span>
 </div>
@@ -7,7 +7,7 @@
     <form class="example-form" id="inner">
       <mat-form-field class="example-full-width">
         <mat-label>How well are you?</mat-label>
-        <input matInput placeholder="/20">
+        <input matInput type="number"   placeholder="/20">
       </mat-form-field>
       &nbsp;
       <mat-form-field style="width: 20vw; margin-left:2em;"class="example-full-width">
@@ -22,12 +22,12 @@
   </div>
   &nbsp;
   <div class="row" style="display: flex; justify-content: center; align-items: center;">
-    <app-ngx-charts-gauge [measure]="this.measure"></app-ngx-charts-gauge>
+    <app-ngx-charts-gauge [range]="this.range" [measure]="this.measure"></app-ngx-charts-gauge>
   </div>
   <div class="row" style="display: flex; justify-content: center; align-items: center;">
-    <app-ngx-charts-line-chart id="lineChart" [measure]="this.measure"></app-ngx-charts-line-chart>
+    <app-ngx-charts-line-chart [range]="this.range" id="lineChart" [measure]="this.measure"></app-ngx-charts-line-chart>
   </div>
   <div>
-    <app-datatable [measure]="this.measure"></app-datatable>
+    <app-datatable [range]="this.range" [measure]="this.measure"></app-datatable>
   </div>
 </div>
