@@ -80,6 +80,6 @@ export class DatatableComponent implements OnInit {
     if (this.measure.toLowerCase() == "wellness") {
       this.cols.push({field: 'info', header: 'Info'});
     }
-    this.table.reset();
+    //this.table.reset();
   }
 }

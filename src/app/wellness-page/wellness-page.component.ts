@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import html2canvas from 'html2canvas';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { timeout } from 'rxjs/operators';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -16,6 +17,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class WellnessPageComponent implements OnInit {
   measure = "Wellness";
   range = "1d";
+  submited = false;
   myGroup = new FormGroup({
     numberForm: new FormControl(),
     textForm: new FormControl(),
@@ -106,24 +108,18 @@ export class WellnessPageComponent implements OnInit {
   }
 
   async onUpload() {
+    const dataPoint: DataPoint = {date: new Date().toISOString()};
     if(this.myGroup.value.numberForm == undefined) {
       return;
     }
-    else if (this.myGroup.value.textForm != null || this.myGroup.value.textForm != "") {
-      const dataPoint: DataPoint = {
-        value: this.myGroup.value.numberForm,
-        info: this.myGroup.value.textForm,
-        date: new Date().toISOString()
-      }
-      const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
+    if (this.myGroup.value.textForm != null || this.myGroup.value.textForm != "") {
+      dataPoint.info = this.myGroup.value.textForm;
     }
-    else {
-      const dataPoint: DataPoint = {
-        value: this.myGroup.value.numberForm,
-        date: new Date().toISOString()
-      }
-      const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
-    }
+    dataPoint.value = this.myGroup.value.numberForm;
+
+    const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
+    this.submited = true;
+    setTimeout(()=>{ this.submited = false }, 3000);
   }
 
 }

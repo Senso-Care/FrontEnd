@@ -3,6 +3,11 @@
   <span>Wellness</span>
 </div>
 <div class="container">
+  <div class="row">
+    <div *ngIf="submited" class="class-submited">
+      Send!
+    </div>
+  </div>
   <div class="row" id="outer">
     <form class="example-form" id="inner" (ngSubmit)="onUpload()" [formGroup]="myGroup">
       <mat-form-field class="example-full-width">
@@ -19,7 +24,6 @@
       <!--</div>-->
     </form>
     &nbsp;
-
   </div>
   &nbsp;
   <div class="row" style="display: flex; justify-content: center; align-items: center;">
