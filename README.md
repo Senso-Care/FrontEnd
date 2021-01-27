@@ -1,3 +1,7 @@
+# PFE Project
+
+This repository is the front end of a PFE project called Senso'Care and create by BOUTRY Guillaume, DUMENY Thomas, MAOUCHI Léandro, MARTINSKY Alexandre and PAGES Sophie. 
+
 # AngularSensoCare
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.2.0.
