@@ -14,7 +14,7 @@ export class NavMenuComponent {
   private static readonly TIMEOUT = 30000;
   private static readonly DEFAULT_RANGE = '7d';
   //metrics = ["Temperature", "Humidity", "Sound"]
-  private interval: NodeJS.Timeout;
+  private interval;
   metrics$: Observable<string[]> = of([]);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(

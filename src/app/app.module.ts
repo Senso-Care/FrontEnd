@@ -28,6 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ApiModule, BASE_PATH } from '../modules/angular';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {FormsModule} from '@angular/forms';
     MatInputModule,
     MatSelectModule,
     ApiModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   exports: [
     MatButtonModule

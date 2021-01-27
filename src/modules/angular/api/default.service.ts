@@ -11,24 +11,23 @@
  */
 /* tslint:disable:no-unused-variable member-ordering */
 
-import { Inject, Injectable, Optional } from '@angular/core';
-import {
-    HttpClient, HttpHeaders, HttpParams,
-    HttpResponse, HttpEvent, HttpParameterCodec
-} from '@angular/common/http';
-import { CustomHttpParameterCodec } from '../encoder';
-import { Observable } from 'rxjs';
+import { Inject, Injectable, Optional }                      from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams,
+         HttpResponse, HttpEvent, HttpParameterCodec }       from '@angular/common/http';
+import { CustomHttpParameterCodec }                          from '../encoder';
+import { Observable }                                        from 'rxjs';
 
+import { DataPoint } from '../model/models';
 import { Metric } from '../model/models';
 import { SensorData } from '../model/models';
 
-import { BASE_PATH, COLLECTION_FORMATS } from '../variables';
-import { Configuration } from '../configuration';
+import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
+import { Configuration }                                     from '../configuration';
 
 
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class DefaultService {
 
@@ -37,7 +36,7 @@ export class DefaultService {
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
 
-    constructor(protected httpClient: HttpClient, @Optional() @Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
+    constructor(protected httpClient: HttpClient, @Optional()@Inject(BASE_PATH) basePath: string, @Optional() configuration: Configuration) {
         if (configuration) {
             this.configuration = configuration;
         }
@@ -67,16 +66,16 @@ export class DefaultService {
 
         if (typeof value === "object") {
             if (Array.isArray(value)) {
-                (value as any[]).forEach(elem => httpParams = this.addToHttpParamsRecursive(httpParams, elem, key));
+                (value as any[]).forEach( elem => httpParams = this.addToHttpParamsRecursive(httpParams, elem, key));
             } else if (value instanceof Date) {
                 if (key != null) {
                     httpParams = httpParams.append(key,
                         (value as Date).toISOString().substr(0, 10));
                 } else {
-                    throw Error("key may not be null if value is Date");
+                   throw Error("key may not be null if value is Date");
                 }
             } else {
-                Object.keys(value).forEach(k => httpParams = this.addToHttpParamsRecursive(
+                Object.keys(value).forEach( k => httpParams = this.addToHttpParamsRecursive(
                     httpParams, value[k], key != null ? `${key}.${k}` : k));
             }
         } else if (key != null) {
@@ -95,10 +94,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getLastMetrics(type: string, range: string, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<Array<SensorData>>;
-    public getLastMetrics(type: string, range: string, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpResponse<Array<SensorData>>>;
-    public getLastMetrics(type: string, range: string, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpEvent<Array<SensorData>>>;
-    public getLastMetrics(type: string, range: string, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json' }): Observable<any> {
+    public getLastMetrics(type: string, range: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<SensorData>>;
+    public getLastMetrics(type: string, range: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<SensorData>>>;
+    public getLastMetrics(type: string, range: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<SensorData>>>;
+    public getLastMetrics(type: string, range: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (type === null || type === undefined) {
             throw new Error('Required parameter type was null or undefined when calling getLastMetrics.');
         }
@@ -106,10 +105,10 @@ export class DefaultService {
             throw new Error('Required parameter range was null or undefined when calling getLastMetrics.');
         }
 
-        let queryParameters = new HttpParams({ encoder: this.encoder });
+        let queryParameters = new HttpParams({encoder: this.encoder});
         if (range !== undefined && range !== null) {
-            queryParameters = this.addToHttpParams(queryParameters,
-                <any>range, 'range');
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>range, 'range');
         }
 
         let headers = this.defaultHeaders;
@@ -128,7 +127,7 @@ export class DefaultService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
@@ -151,18 +150,18 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMetrics(range: string, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<Array<string>>;
-    public getMetrics(range: string, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpResponse<Array<string>>>;
-    public getMetrics(range: string, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpEvent<Array<string>>>;
-    public getMetrics(range: string, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json' }): Observable<any> {
+    public getMetrics(range: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<string>>;
+    public getMetrics(range: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<string>>>;
+    public getMetrics(range: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<string>>>;
+    public getMetrics(range: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (range === null || range === undefined) {
             throw new Error('Required parameter range was null or undefined when calling getMetrics.');
         }
 
-        let queryParameters = new HttpParams({ encoder: this.encoder });
+        let queryParameters = new HttpParams({encoder: this.encoder});
         if (range !== undefined && range !== null) {
-            queryParameters = this.addToHttpParams(queryParameters,
-                <any>range, 'range');
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>range, 'range');
         }
 
         let headers = this.defaultHeaders;
@@ -181,7 +180,7 @@ export class DefaultService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
@@ -205,10 +204,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMetricsFromSensor(name: string, range: string, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<SensorData>;
-    public getMetricsFromSensor(name: string, range: string, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpResponse<SensorData>>;
-    public getMetricsFromSensor(name: string, range: string, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpEvent<SensorData>>;
-    public getMetricsFromSensor(name: string, range: string, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json' }): Observable<any> {
+    public getMetricsFromSensor(name: string, range: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<SensorData>;
+    public getMetricsFromSensor(name: string, range: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<SensorData>>;
+    public getMetricsFromSensor(name: string, range: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<SensorData>>;
+    public getMetricsFromSensor(name: string, range: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (name === null || name === undefined) {
             throw new Error('Required parameter name was null or undefined when calling getMetricsFromSensor.');
         }
@@ -216,10 +215,10 @@ export class DefaultService {
             throw new Error('Required parameter range was null or undefined when calling getMetricsFromSensor.');
         }
 
-        let queryParameters = new HttpParams({ encoder: this.encoder });
+        let queryParameters = new HttpParams({encoder: this.encoder});
         if (range !== undefined && range !== null) {
-            queryParameters = this.addToHttpParams(queryParameters,
-                <any>range, 'range');
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>range, 'range');
         }
 
         let headers = this.defaultHeaders;
@@ -238,7 +237,7 @@ export class DefaultService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
@@ -262,10 +261,10 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getMetricsFromType(type: string, range: string, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<Metric>;
-    public getMetricsFromType(type: string, range: string, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpResponse<Metric>>;
-    public getMetricsFromType(type: string, range: string, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpEvent<Metric>>;
-    public getMetricsFromType(type: string, range: string, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json' }): Observable<any> {
+    public getMetricsFromType(type: string, range: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Metric>;
+    public getMetricsFromType(type: string, range: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Metric>>;
+    public getMetricsFromType(type: string, range: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Metric>>;
+    public getMetricsFromType(type: string, range: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (type === null || type === undefined) {
             throw new Error('Required parameter type was null or undefined when calling getMetricsFromType.');
         }
@@ -273,10 +272,10 @@ export class DefaultService {
             throw new Error('Required parameter range was null or undefined when calling getMetricsFromType.');
         }
 
-        let queryParameters = new HttpParams({ encoder: this.encoder });
+        let queryParameters = new HttpParams({encoder: this.encoder});
         if (range !== undefined && range !== null) {
-            queryParameters = this.addToHttpParams(queryParameters,
-                <any>range, 'range');
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>range, 'range');
         }
 
         let headers = this.defaultHeaders;
@@ -295,7 +294,7 @@ export class DefaultService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
@@ -317,18 +316,18 @@ export class DefaultService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSensors(range: string, observe?: 'body', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<Array<string>>;
-    public getSensors(range: string, observe?: 'response', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpResponse<Array<string>>>;
-    public getSensors(range: string, observe?: 'events', reportProgress?: boolean, options?: { httpHeaderAccept?: 'application/json' }): Observable<HttpEvent<Array<string>>>;
-    public getSensors(range: string, observe: any = 'body', reportProgress: boolean = false, options?: { httpHeaderAccept?: 'application/json' }): Observable<any> {
+    public getSensors(range: string, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<Array<string>>;
+    public getSensors(range: string, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpResponse<Array<string>>>;
+    public getSensors(range: string, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json'}): Observable<HttpEvent<Array<string>>>;
+    public getSensors(range: string, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json'}): Observable<any> {
         if (range === null || range === undefined) {
             throw new Error('Required parameter range was null or undefined when calling getSensors.');
         }
 
-        let queryParameters = new HttpParams({ encoder: this.encoder });
+        let queryParameters = new HttpParams({encoder: this.encoder});
         if (range !== undefined && range !== null) {
-            queryParameters = this.addToHttpParams(queryParameters,
-                <any>range, 'range');
+          queryParameters = this.addToHttpParams(queryParameters,
+            <any>range, 'range');
         }
 
         let headers = this.defaultHeaders;
@@ -347,13 +346,72 @@ export class DefaultService {
 
 
         let responseType: 'text' | 'json' = 'json';
-        if (httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
             responseType = 'text';
         }
 
         return this.httpClient.get<Array<string>>(`${this.configuration.basePath}/sensors`,
             {
                 params: queryParameters,
+                responseType: <any>responseType,
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get data from type
+     * Post a metric
+     * @param type Metrics type
+     * @param dataPoint 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postMetricsFromType(type: string, dataPoint: DataPoint, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<any>;
+    public postMetricsFromType(type: string, dataPoint: DataPoint, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpResponse<any>>;
+    public postMetricsFromType(type: string, dataPoint: DataPoint, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined}): Observable<HttpEvent<any>>;
+    public postMetricsFromType(type: string, dataPoint: DataPoint, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined}): Observable<any> {
+        if (type === null || type === undefined) {
+            throw new Error('Required parameter type was null or undefined when calling postMetricsFromType.');
+        }
+        if (dataPoint === null || dataPoint === undefined) {
+            throw new Error('Required parameter dataPoint was null or undefined when calling postMetricsFromType.');
+        }
+
+        let headers = this.defaultHeaders;
+
+        let httpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (httpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+            ];
+            httpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (httpHeaderAcceptSelected !== undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType: 'text' | 'json' = 'json';
+        if(httpHeaderAcceptSelected && httpHeaderAcceptSelected.startsWith('text')) {
+            responseType = 'text';
+        }
+
+        return this.httpClient.post<any>(`${this.configuration.basePath}/metrics/${encodeURIComponent(String(type))}`,
+            dataPoint,
+            {
                 responseType: <any>responseType,
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
