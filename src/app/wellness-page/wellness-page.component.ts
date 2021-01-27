@@ -108,28 +108,18 @@ export class WellnessPageComponent implements OnInit {
   }
 
   async onUpload() {
+    const dataPoint: DataPoint = {date: new Date().toISOString()};
     if(this.myGroup.value.numberForm == undefined) {
       return;
     }
-    else if (this.myGroup.value.textForm != null || this.myGroup.value.textForm != "") {
-      const dataPoint: DataPoint = {
-        value: this.myGroup.value.numberForm,
-        info: this.myGroup.value.textForm,
-        date: new Date().toISOString()
-      }
-      const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
-      this.submited = true;
-      setTimeout(()=>{ this.submited = false }, 3000);
+    if (this.myGroup.value.textForm != null || this.myGroup.value.textForm != "") {
+      dataPoint.info = this.myGroup.value.textForm;
     }
-    else {
-      const dataPoint: DataPoint = {
-        value: this.myGroup.value.numberForm,
-        date: new Date().toISOString()
-      }
-      const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
-      this.submited = true;
-      setTimeout(()=>{ this.submited = false }, 3000);
-    }
+    dataPoint.value = this.myGroup.value.numberForm;
+
+    const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
+    this.submited = true;
+    setTimeout(()=>{ this.submited = false }, 3000);
   }
 
 }
