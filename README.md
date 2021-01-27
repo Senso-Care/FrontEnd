@@ -1,6 +1,6 @@
 # PFE Project
 
-This repository is the front end of a PFE project called Senso'Care and create by BOUTRY Guillaume, DUMENY Thomas, MAOUCHI Léandro, MARTINSKY Alexandre and PAGES Sophie. 
+This repository is the front end of a PFE project called Senso'Care and created by BOUTRY Guillaume, DUMENY Thomas, MAOUCHI Léandro, MARTINSKY Alexandre and PAGES Sophie. 
 
 # AngularSensoCare
 
