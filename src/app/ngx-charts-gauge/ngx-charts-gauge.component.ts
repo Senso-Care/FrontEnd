@@ -60,6 +60,7 @@ export class NgxChartsGaugeComponent implements OnInit {
         const values = [];
         this.sum = 0;
         this.mean = 0;
+        console.log(result)
         for (const sensor of result) {
           console.log(sensor.name);
           /*if(sensor.name.toLowerCase().startsWith("temperature")) {
@@ -67,6 +68,7 @@ export class NgxChartsGaugeComponent implements OnInit {
               domain: ['#5AA454']
             };
           }*/
+
           const value = Number(sensor.series[0].value.toFixed(2));
           values.push({
             name: sensor.name,

@@ -56,7 +56,8 @@ export class DatatableComponent implements OnInit {
               rows.push({
                 measure: sensor.name,
                 date: dataPoint.date,
-                value: dataPoint.value
+                value: dataPoint.value,
+                info: dataPoint.info
               });
             }
           }
@@ -68,40 +69,6 @@ export class DatatableComponent implements OnInit {
     );
   }
 
-
-  /*set measure(measure: string) {
-    this._measure = measure;
-    this.serviceData.getAllData()
-      .then(response => {
-        if (this.measure == "All_sensors") {
-          for (const value of response) {
-            for (const serie of value.series) {
-              this.rows.push({
-                measure: value.name,
-                date: serie.name,
-                value: serie.value
-              });
-            }
-          }
-        }
-        else {
-          for (const value of response) {
-            if (value.name == measure) {
-              for (const serie of value.series) {
-                this.rows.push({
-                  measure: value.name,
-                  date: serie.name,
-                  value: serie.value
-                });
-              }
-            }
-          }
-        }
-        this.table.reset();
-      })
-      .catch(error => console.log(error));
-  }*/
-
   constructor(private api: DefaultService) { }
 
   ngOnInit(): void {
@@ -110,5 +77,9 @@ export class DatatableComponent implements OnInit {
       { field: 'date', header: 'Date' },
       { field: 'value', header: 'Value' },
     ];
+    if (this.measure.toLowerCase() == "wellness") {
+      this.cols.push({field: 'info', header: 'Info'});
+    }
+    this.table.reset();
   }
 }
