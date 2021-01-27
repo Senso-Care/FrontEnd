@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import html2canvas from 'html2canvas';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { timeout } from 'rxjs/operators';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
@@ -16,6 +17,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 export class WellnessPageComponent implements OnInit {
   measure = "Wellness";
   range = "1d";
+  submited = false;
   myGroup = new FormGroup({
     numberForm: new FormControl(),
     textForm: new FormControl(),
@@ -116,6 +118,8 @@ export class WellnessPageComponent implements OnInit {
         date: new Date().toISOString()
       }
       const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
+      this.submited = true;
+      setTimeout(()=>{ this.submited = false }, 3000);
     }
     else {
       const dataPoint: DataPoint = {
@@ -123,6 +127,8 @@ export class WellnessPageComponent implements OnInit {
         date: new Date().toISOString()
       }
       const res = await this.api.postMetricsFromType('wellness', dataPoint).toPromise();
+      this.submited = true;
+      setTimeout(()=>{ this.submited = false }, 3000);
     }
   }
 
