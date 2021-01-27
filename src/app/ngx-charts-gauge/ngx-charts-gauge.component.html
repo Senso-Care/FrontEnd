@@ -1,10 +1,13 @@
 <div class="chart-parent" style="text-align:center">
   <ngx-charts-gauge
+    [view]="view"
     [scheme]="colorScheme"
     [results]="single"
-    [min]="-10"
-    [max]="60"
+    [min]="min"
+    [max]="max"
     [legendPosition]="legendPosition"
+    [legend]="legend"
+    [valueFormatting]="valueFormatting"
     (select)="onSelect($event)"
     (activate)="onActivate($event)"
     (deactivate)="onDeactivate($event)"

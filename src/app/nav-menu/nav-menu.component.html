@@ -6,9 +6,10 @@
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/home">Home page</a>
-      <a mat-list-item routerLink="/temperature">Old temperature</a>
-      <a *ngFor="let metric of this.metrics" mat-list-item routerLink="/board/{{metric}}">{{metric}}</a>
-      <a mat-list-item routerLink="/board/wellness">Wellness</a>
+      <ng-container *ngIf="metrics$ | async as menu">
+        <a *ngFor="let metric of menu" mat-list-item routerLink="/board/{{metric}}">{{metric | titlecase}}</a>
+        <a *ngIf="menu == null || !(menu).includes('wellness')" mat-list-item routerLink="/board/wellness">Wellness</a>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

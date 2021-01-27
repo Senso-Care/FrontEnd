@@ -1,19 +1,23 @@
-<ngx-datatable class="material" [rows]="rows" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50"
-  [rowHeight]="50" [scrollbarV]="true" [sorts]="[{prop: 'name', dir: 'desc'}]">
+<p-table #table id="datatable" [columns]="cols" [value]="rows" sortMode="multiple" [paginator]="true" [rows]="10">
+  <ng-template pTemplate="caption">
+    Datatable
+  </ng-template>
+  <ng-template pTemplate="header" let-columns>
+      <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
 
-  <ngx-datatable-column name="Company">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.company}}
-    </ng-template>
-  </ngx-datatable-column>
+          </th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rows let-columns="columns">
+      <tr>
+          <td *ngFor="let col of columns">
+              {{rows[col.field]}}
+          </td>
+      </tr>
+  </ng-template>
+</p-table>
+&nbsp;
 
-  <ngx-datatable-column name="Name">
-    <ng-template let-row="row" ngx-datatable-cell-template>
-      {{row.name}}
-    </ng-template>
-  </ngx-datatable-column>
-
-  <ngx-datatable-column name="Gender">
-  </ngx-datatable-column>
-
-</ngx-datatable>

@@ -1,0 +1,23 @@
+<div id="filters-panel">
+  <div class="select">
+    <mat-form-field appearance="fill" style=" float: left;
+    margin-Right: -50%;
+    margin-top: 2em;
+    margin-left: 1em;">
+      <mat-label>Time</mat-label>
+      <mat-select [(ngModel)]="selectedRange" >
+        <mat-option *ngFor="let time of range" [value]="time.value">
+          {{time.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="class-button">
+    <button mat-raised-button color="primary" (click)="downloadChart()" style=" float: right;
+    margin-left: -50%;
+    margin-top: 2em;
+    margin-right: 1em;
+    font-size: 1.2em;">Download PDF</button>
+  </div>
+</div>
+

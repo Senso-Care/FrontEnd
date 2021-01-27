@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TemperaturePageComponent } from './temperature-page.component';
+import { FiltersPanelComponent } from './filters-panel.component';
 
-describe('TemperaturePageComponent', () => {
-  let component: TemperaturePageComponent;
-  let fixture: ComponentFixture<TemperaturePageComponent>;
+describe('FiltersPanelComponent', () => {
+  let component: FiltersPanelComponent;
+  let fixture: ComponentFixture<FiltersPanelComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TemperaturePageComponent ]
+      declarations: [ FiltersPanelComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TemperaturePageComponent);
+    fixture = TestBed.createComponent(FiltersPanelComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -5,3 +5,33 @@
   height: 200px;
   line-height: 200px;
 }
+
+#buttons {
+  font-size: 20px;
+  display: table;
+  margin: 0 auto;
+}
+
+#inner {
+  font-size: 20px;
+}
+
+#outer {
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+
+.class-message-no-input {
+  text-align: center;
+  margin: auto;
+  font-size: 18px;
+  color: rgb(228, 44, 44);
+}
+
+.class-message-input-send {
+  text-align: center;
+  margin: auto;
+  font-size: 28px;
+  color: rgb(18, 168, 93);
+}

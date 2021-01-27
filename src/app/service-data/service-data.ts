@@ -1,4 +1,5 @@
 import { Injectable, Optional } from '@angular/core';
+import { ApiModule, DefaultService } from 'src/modules/angular';
 //import { HttpClient } from '@angular/common/http';
 
 export interface DataInfo {
@@ -14,10 +15,10 @@ export class ServiceData {
 
   }*/
 
-  constructor() {
+  constructor(private api: DefaultService) {
   }
 
-  async getSingleData() {
+  async getLastData() {
     let single = [
       {
         "name": "Temperature",
@@ -32,12 +33,12 @@ export class ServiceData {
         "value": 12
       },
       {
-        "name": "Vox2",
+        "name": "Sound",
         "value": 98
       },
       {
         "name": "Wellness",
-        "value": 8
+        "value": 10
       },
     ];
 
@@ -48,157 +49,208 @@ export class ServiceData {
   async getAverageData() {
     let averageData = [
       {
-        "name": "May",
+        "name": "Temperature",
         "series": [
           {
-            "name": "Sun",
-            "value": 20
-          },
-          {
-            "name": "Sat",
-            "value": 25
-          },
-          {
-            "name": "Thu",
-            "value": 27
-          },
-          {
-            "name": "Wed",
-            "value": 32
-          },
-          {
-            "name": "Tue",
-            "value": 24
-          },
-          {
-            "name": "Mon",
-            "value": 22
+            "name": "Monday",
+            "series": [
+              {
+                "name": "00",
+                "value": 22
+              },
+              {
+                "name": "01",
+                "value": 20
+              },
+              {
+                "name": "02",
+                "value": 25
+              },
+              {
+                "name": "03",
+                "value": 27
+              },
+              {
+                "name": "04",
+                "value": 32
+              },
+              {
+                "name": "05",
+                "value": 24
+              },
+              {
+                "name": "06",
+                "value": 22
+              },
+              {
+                "name": "07",
+                "value": 20
+              },
+              {
+                "name": "08",
+                "value": 25
+              },
+              {
+                "name": "09",
+                "value": 27
+              },
+              {
+                "name": "10",
+                "value": 32
+              },
+              {
+                "name": "11",
+                "value": 24
+              },
+              {
+                "name": "12",
+                "value": 22
+              }
+              ,
+              {
+                "name": "13",
+                "value": 20
+              },
+              {
+                "name": "14",
+                "value": 25
+              },
+              {
+                "name": "15",
+                "value": 27
+              },
+              {
+                "name": "16",
+                "value": 32
+              },
+              {
+                "name": "17",
+                "value": 24
+              },
+              {
+                "name": "18",
+                "value": 22
+              },
+              {
+                "name": "19",
+                "value": 27
+              },
+              {
+                "name": "20",
+                "value": 32
+              },
+              {
+                "name": "21",
+                "value": 24
+              },
+              {
+                "name": "22",
+                "value": 22
+              },{
+                "name": "23",
+                "value": 22
+              }
+            ]
           }
         ]
       },
       {
-        "name": "June",
+      "name": "Humidity",
         "series": [
           {
-            "name": "Sun",
-            "value": 22
+            "name": "January",
+            "series": [
+              {
+                "name": "Sun",
+                "value": 81
+              },
+              {
+                "name": "Sat",
+                "value": 80
+              },
+              {
+                "name": "Thu",
+                "value": 83
+              },
+              {
+                "name": "Wed",
+                "value": 82
+              },
+              {
+                "name": "Tue",
+                "value": 89
+              },
+              {
+                "name": "Mon",
+                "value": 22
+              }
+            ]
           },
-          {
-            "name": "Sat",
-            "value": 24
-          },
-          {
-            "name": "Thu",
-            "value": 27
-          },
-          {
-            "name": "Wed",
-            "value": 26
-          },
-          {
-            "name": "Tue",
-            "value": 28
-          },
-          {
-            "name": "Mon",
-            "value": 25
-          }
         ]
       },
+      {
+        "name": "Sound",
+          "series": [
+            {
+              "name": "January",
+              "series": [
+                {
+                  "name": "Sun",
+                  "value": 90
+                },
+                {
+                  "name": "Sat",
+                  "value": 96
+                },
+                {
+                  "name": "Thu",
+                  "value": 80
+                }
+              ]
+            },
+          ]
+        },
+        {
+          "name": "Wellness",
+            "series": [
+              {
+                "name": "January",
+                "series": [
+                  {
+                    "name": "Sun",
+                    "value": 8
+                  },
+                  {
+                    "name": "Sat",
+                    "value": 7
+                  },
+                  {
+                    "name": "Thu",
+                    "value": 4
+                  },
+                  {
+                    "name": "Wed",
+                    "value": 8
+                  },
+                  {
+                    "name": "Tue",
+                    "value": 2
+                  },
+                  {
+                    "name": "Mon",
+                    "value": 10
+                  }
+                ]
+              },
+            ]
+          },
 
-      {
-        "name": "July",
-        "series": [
-          {
-            "name": "Sun",
-            "value": 25
-          },
-          {
-            "name": "Sat",
-            "value": 26
-          },
-          {
-            "name": "Thu",
-            "value": 33
-          },
-          {
-            "name": "Wed",
-            "value": 32
-          },
-          {
-            "name": "Tue",
-            "value": 30
-          },
-          {
-            "name": "Mon",
-            "value": 34
-          }
-        ]
-      },
-      {
-        "name": "September",
-        "series": [
-          {
-            "name": "Sun",
-            "value": 15
-          },
-          {
-            "name": "Sat",
-            "value": 16
-          },
-          {
-            "name": "Thu",
-            "value": 20
-          },
-          {
-            "name": "Wed",
-            "value": 17
-          },
-          {
-            "name": "Tue",
-            "value": 13
-          },
-          {
-            "name": "Mon",
-            "value": 18
-          }
-        ]
-      },
-      {
-        "name": "Decembre",
-        "series": [
-          {
-            "name": "Sun",
-            "value": 5
-          },
-          {
-            "name": "Sat",
-            "value": 7
-          },
-          {
-            "name": "Thu",
-            "value": 11
-          },
-          {
-            "name": "Wed",
-            "value": 8
-          },
-          {
-            "name": "Tue",
-            "value": 4
-          },
-          {
-            "name": "Mon",
-            "value": 0
-          }
-        ]
-      }
     ];
 
     return averageData;
   }
 
-  async getMultiData() {
+  async getAllData() {
     let multi = [
       {
         "name": "Temperature",
@@ -214,10 +266,17 @@ export class ServiceData {
           {
             "name": "08-07-2020",
             "value": 28
+          },
+          {
+            "name": "22-12-2020",
+            "value": 10
+          },
+          {
+            "name": "25-12-2020",
+            "value": 4
           }
         ]
       },
-
       {
         "name": "Humidity",
         "series": [
@@ -235,9 +294,8 @@ export class ServiceData {
           }
         ]
       },
-
       {
-        "name": "Heart",
+        "name": "Sound",
         "series": [
           {
             "name": "23-05-2020",
@@ -252,9 +310,34 @@ export class ServiceData {
             "value": 14
           }
         ]
+      },
+      {
+        "name": "Wellness",
+        "series": [
+          {
+            "name": "23-05-2020",
+            "value": 10
+          },
+          {
+            "name": "28-05-2020",
+            "value": 1
+          },
+          {
+            "name": "08-07-2020",
+            "value": 4
+          },
+          {
+            "name": "22-12-2020",
+            "value": 6
+          },
+          {
+            "name": "24-12-2020",
+            "value": 10
+          }
+        ]
       }
     ];
-
     return multi;
   }
+
 }
