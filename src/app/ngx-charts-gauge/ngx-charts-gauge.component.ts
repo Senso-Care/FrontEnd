@@ -57,13 +57,10 @@ export class NgxChartsGaugeComponent implements OnInit {
     this._measure = measure;
     this.api.getLastMetrics(measure.toLowerCase(), this.range).subscribe(
       (result: SensorData[]) => {
-        console.log(result);
         const values = [];
         this.sum = 0;
         this.mean = 0;
-        console.log(result)
         for (const sensor of result) {
-          console.log(sensor.name);
           if(sensor.name.toLowerCase().startsWith("wellness")) {
             this.min = 0;
             this.max = 20;

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable, of } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { Observable, of, timer } from 'rxjs';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { DefaultService } from 'src/modules/angular';
 @Component({
   selector: 'app-nav-menu',
@@ -16,6 +16,7 @@ export class NavMenuComponent {
   //metrics = ["Temperature", "Humidity", "Sound"]
   private interval;
   metrics$: Observable<string[]> = of([]);
+  subscription;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
       map(result => result.matches),
@@ -26,13 +27,11 @@ export class NavMenuComponent {
   }
 
   ngOnInit() {
-    this.metrics$ = this.api.getMetrics(NavMenuComponent.DEFAULT_RANGE);
-    this.interval = setInterval(() => {
-      this.metrics$ = this.api.getMetrics(NavMenuComponent.DEFAULT_RANGE)
-    }, NavMenuComponent.TIMEOUT);
+    this.metrics$  = timer(0, NavMenuComponent.TIMEOUT).pipe<string[]>(
+      switchMap(() => this.api.getMetrics(NavMenuComponent.DEFAULT_RANGE))
+    )
   }
 
   ngOnDestroy() {
-    clearInterval(this.interval)
   }
 }
