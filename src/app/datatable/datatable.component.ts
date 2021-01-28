@@ -38,7 +38,9 @@ export class DatatableComponent implements OnInit {
   }
   private _measure: string;
 
-
+  downloadCSV = () => {
+    this.table.exportCSV();
+  }
   subscription: Subscription;
 
   getMeasures(measure: string, range: string) {

@@ -71,6 +71,8 @@ export class FiltersPanelComponent implements OnInit {
     this.docDefinition().then(docDef => {
       pdfMake.createPdf(docDef).download(this.measure + '.pdf');
     });
-
   }
+
+  @Input()
+  downloadCSV;
 }

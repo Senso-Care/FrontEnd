@@ -1,4 +1,4 @@
-<app-filters-panel (onSelectedRange)="rangeChanged($event)" [measure]="this.measure" [docDefinition]="this.docDefinition()"></app-filters-panel>
+<app-filters-panel (onSelectedRange)="rangeChanged($event)" [downloadCSV]="table.downloadCSV" [measure]="this.measure" [docDefinition]="this.docDefinition()"></app-filters-panel>
 <div id="title">
   <span>{{this.measure | titlecase}}</span>
 </div>
@@ -10,6 +10,6 @@
     <app-ngx-charts-line-chart [range]="this.range" id="lineChart"  [measure]="this.measure"></app-ngx-charts-line-chart>
   </div>
   <div style="padding-top: 50px;">
-    <app-datatable [range]="this.range" [measure]="this.measure"></app-datatable>
+    <app-datatable #table [range]="this.range" [measure]="this.measure"></app-datatable>
   </div>
 </div>
