@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'board/wellness', component: WellnessPageComponent },
   { path: 'board', component: HomePageComponent},
   { path: 'board/:measure', component: GenericMetricBoardComponent },
-  { path: '', redirectTo: '‘/home', pathMatch: 'full' },
+  { path: '', component: HomePageComponent, pathMatch: 'full' },
   ];
 
 @NgModule({
