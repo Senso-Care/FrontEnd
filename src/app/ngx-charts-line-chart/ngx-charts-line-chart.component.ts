@@ -1,8 +1,9 @@
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { DefaultService, Metric, SensorData } from 'src/modules/angular';
-import { ServiceData } from '../service-data/service-data';
+import { Observable, of, Subscription, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { DefaultService, Metric } from 'src/modules/angular';
+import { DisplayConstants } from '../display.constants';
 
 @Component({
   selector: 'app-ngx-charts-line-chart',
@@ -37,7 +38,7 @@ export class NgxChartsLineChartComponent implements OnInit {
   colorScheme = {
     domain: ['#5AA454', '#247ad6', '#e34529', '#b762f0', '#acb3c2', "#f59714", "#fa93fa", "#a3eb6c", "#6de8e8"]
   };
-  _range: string;
+  _range: string = DisplayConstants.DEFAULT_RANGE;
   @Input()
   get range() : string {
     return this._range;
@@ -65,25 +66,25 @@ export class NgxChartsLineChartComponent implements OnInit {
     if (this.subscription != null) {
       this.subscription.unsubscribe();
     }
-    this.subscription = this.api.getMetricsFromType(measure.toLowerCase(), range).subscribe(
-      (result: Metric) => {
-        this.multi = [];
-        if (result.sensors == null)
-          return;
-        for (const sensor of result.sensors) {
-          const series = {
-            name: sensor.name || 'Unknown',
-            series: sensor.series.map(obj => {
-              return {
-                name: new Date(obj.date),
-                value: obj.value
-              }
-            })
-          }
-          this.multi.push(series);
+    this.subscription = timer(0, DisplayConstants.REFRESH_RATE).pipe<Metric>(
+      switchMap(() => this.api.getMetricsFromType(measure.toLowerCase(), range))
+    ).subscribe((result: Metric) => {
+      this.multi = [];
+      if (result.sensors == null)
+        return;
+      for (const sensor of result.sensors) {
+        const series = {
+          name: sensor.name || 'Unknown',
+          series: sensor.series.map(obj => {
+            return {
+              name: new Date(obj.date),
+              value: obj.value
+            }
+          })
         }
+        this.multi.push(series);
       }
-    );
+    });
   }
 
   constructor(private api: DefaultService) {

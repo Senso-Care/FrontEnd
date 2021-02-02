@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ServiceData } from '../service-data/service-data';
 import { DefaultService, Metric, SensorData } from 'src/modules/angular';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, timer } from 'rxjs';
+import { DisplayConstants } from '../display.constants';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-ngx-charts-gauge',
@@ -54,40 +56,39 @@ export class NgxChartsGaugeComponent implements OnInit {
     if (this.subscription != null) {
       this.subscription.unsubscribe();
     }
-    this._measure = measure;
-    this.api.getLastMetrics(measure.toLowerCase(), this.range).subscribe(
-      (result: SensorData[]) => {
-        const values = [];
-        this.sum = 0;
-        this.mean = 0;
-        for (const sensor of result) {
-          if(sensor.name.toLowerCase().startsWith("wellness")) {
-            this.min = 0;
-            this.max = 20;
-          }
-          if(sensor.name.toLowerCase().startsWith("humidity")) {
-            this.min = 0;
-            this.max = 100;
-          }
-          if(sensor.name.toLowerCase().startsWith("sound")) {
-            this.min = 0;
-            this.max = 120;
-          }
-          if (sensor.series[0].value == null)
-            continue;
-          const value = Number(sensor.series[0].value.toFixed(2));
-          values.push({
-            name: sensor.name,
-            value: value
-          });
-          this.sum += value;
+    this.subscription = timer(0, DisplayConstants.REFRESH_RATE).pipe<Array<SensorData>>(
+      switchMap(() => this.api.getLastMetrics(measure.toLowerCase(), range))
+    ).subscribe( (result: SensorData[]) => {
+      const values = [];
+      this.sum = 0;
+      this.mean = 0;
+      for (const sensor of result) {
+        if(sensor.name.toLowerCase().startsWith("wellness")) {
+          this.min = 0;
+          this.max = 20;
         }
-        this.single = values;
-        if (this.single.length == 0)
-          return;
-        this.mean = Number((this.sum / this.single.length).toFixed(2));
+        if(sensor.name.toLowerCase().startsWith("humidity")) {
+          this.min = 0;
+          this.max = 100;
+        }
+        if(sensor.name.toLowerCase().startsWith("sound")) {
+          this.min = 0;
+          this.max = 120;
+        }
+        if (sensor.series[0].value == null)
+          continue;
+        const value = Number(sensor.series[0].value.toFixed(2));
+        values.push({
+          name: sensor.name,
+          value: value
+        });
+        this.sum += value;
       }
-    );
+      this.single = values;
+      if (this.single.length == 0)
+        return;
+      this.mean = Number((this.sum / this.single.length).toFixed(2));
+    });
   }
 
 

@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable, of, timer } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { DefaultService } from 'src/modules/angular';
+import { DisplayConstants } from 'src/app/display.constants';
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
@@ -11,8 +11,6 @@ import { DefaultService } from 'src/modules/angular';
 })
 export class NavMenuComponent {
 
-  private static readonly TIMEOUT = 30000;
-  private static readonly DEFAULT_RANGE = '7d';
   metrics$: Observable<string[]> = of([]);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -24,8 +22,8 @@ export class NavMenuComponent {
   }
 
   ngOnInit() {
-    this.metrics$  = timer(0, NavMenuComponent.TIMEOUT).pipe<string[]>(
-      switchMap(() => this.api.getMetrics(NavMenuComponent.DEFAULT_RANGE))
+    this.metrics$  = timer(0, DisplayConstants.REFRESH_RATE).pipe<string[]>(
+      switchMap(() => this.api.getMetrics(DisplayConstants.DEFAULT_RANGE))
     )
   }
 

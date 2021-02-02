@@ -1,10 +1,10 @@
-import { ValueTransformer } from '@angular/compiler/src/util';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { ServiceData } from '../service-data/service-data';
-import { Measure } from './measure.interface';
-import { DefaultService, Metric, SensorData } from 'src/modules/angular';
-import { Observable, Subscription } from 'rxjs';
 import { Table } from 'primeng/table';
+import { Subscription, timer } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { DefaultService, Metric } from 'src/modules/angular';
+import { DisplayConstants } from '../display.constants';
+import { Measure } from './measure.interface';
 
 @Component({
   selector: 'app-datatable',
@@ -49,26 +49,26 @@ export class DatatableComponent implements OnInit {
     if (this.subscription != null) {
       this.subscription.unsubscribe();
     }
-    this.subscription = this.api.getMetricsFromType(measure.toLowerCase(), range).subscribe(
-      (result: Metric) => {
-        const rows = [];
-        if (result.sensors != null && result.sensors != undefined) {
-          for (const sensor of result.sensors) {
-            for (const dataPoint of sensor.series) {
-              rows.push({
-                measure: sensor.name,
-                date: dataPoint.date,
-                value: dataPoint.value,
-                info: dataPoint.info
-              });
-            }
+    this.subscription = timer(0, DisplayConstants.REFRESH_RATE).pipe<Metric>(
+      switchMap(() => this.api.getMetricsFromType(measure.toLowerCase(), range))
+    ).subscribe( (result: Metric) => {
+      const rows = [];
+      if (result.sensors != null && result.sensors != undefined) {
+        for (const sensor of result.sensors) {
+          for (const dataPoint of sensor.series) {
+            rows.push({
+              measure: sensor.name,
+              date: dataPoint.date,
+              value: dataPoint.value,
+              info: dataPoint.info
+            });
           }
         }
-        this.table.reset();
-        this.table.clearState();
-        this.rows = rows;
       }
-    );
+      this.table.reset();
+      this.table.clearState();
+      this.rows = rows;
+    });
   }
 
   constructor(private api: DefaultService) { }
